@@ -1,0 +1,20 @@
+{
+  "themeId": "side.zombie",
+  "kind": "side",
+  "id": "zombie",
+  "css": {
+    "--piece-accent": "var(--side-zombie)",
+    "--piece-rail-edge": "var(--side-zombie)",
+    "--piece-select-glow": "color-mix(in srgb, #9b7fb0 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#9b7fb0",
+    "accentMuted": "#5c4a6a",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": null
+}

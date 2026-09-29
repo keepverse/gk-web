@@ -1,0 +1,19 @@
+{
+  "themeId": "bucket.grant",
+  "kind": "bucket",
+  "id": "grant",
+  "css": {
+    "--piece-accent": "#d8c078",
+    "--piece-rail-edge": "#d8c078",
+    "--piece-select-glow": "color-mix(in srgb, #d8c078 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#d8c078",
+    "accentMuted": "#8a7840",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  }
+}

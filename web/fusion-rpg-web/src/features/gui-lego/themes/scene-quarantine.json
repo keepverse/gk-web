@@ -1,0 +1,20 @@
+{
+  "themeId": "scene.quarantine",
+  "kind": "scene",
+  "id": "quarantine",
+  "css": {
+    "--piece-accent": "#8fb8c9",
+    "--scene-bed": "linear-gradient(180deg, rgba(58, 78, 92, 0.9), rgba(14, 20, 26, 0.95))",
+    "--scene-window": "#131a20"
+  },
+  "paint": {
+    "accent": "#8fb8c9",
+    "accentMuted": "#54707d",
+    "onAccent": "#0a1013"
+  },
+  "vfx": {
+    "select": "vfx.quarantine-seal",
+    "idle": null
+  },
+  "glyphDefault": null
+}

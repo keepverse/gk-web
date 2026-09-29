@@ -1,0 +1,20 @@
+{
+  "themeId": "resource.qi",
+  "kind": "resource",
+  "id": "qi",
+  "css": {
+    "--piece-accent": "#3498db",
+    "--piece-rail-edge": "#3498db",
+    "--piece-select-glow": "color-mix(in srgb, #3498db 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#3498db",
+    "accentMuted": "#1f5a82",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.resource-qi-pulse",
+    "idle": null
+  },
+  "glyphDefault": "yin-yang"
+}

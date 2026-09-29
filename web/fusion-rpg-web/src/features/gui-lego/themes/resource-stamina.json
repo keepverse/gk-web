@@ -1,0 +1,20 @@
+{
+  "themeId": "resource.stamina",
+  "kind": "resource",
+  "id": "stamina",
+  "css": {
+    "--piece-accent": "#f1c40f",
+    "--piece-rail-edge": "#f1c40f",
+    "--piece-select-glow": "color-mix(in srgb, #f1c40f 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#f1c40f",
+    "accentMuted": "#8a7209",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.resource-stamina-pulse",
+    "idle": null
+  },
+  "glyphDefault": "zap"
+}

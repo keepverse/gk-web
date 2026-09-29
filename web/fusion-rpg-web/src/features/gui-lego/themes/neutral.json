@@ -1,0 +1,20 @@
+{
+  "themeId": "neutral",
+  "kind": "neutral",
+  "id": "default",
+  "css": {
+    "--piece-accent": "var(--sun)",
+    "--piece-rail-edge": "var(--border-control)",
+    "--piece-select-glow": "transparent"
+  },
+  "paint": {
+    "accent": "#e0b44b",
+    "accentMuted": "#6b6358",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": null
+}

@@ -1,0 +1,20 @@
+{
+  "themeId": "status-category.dot",
+  "kind": "status-category",
+  "id": "dot",
+  "css": {
+    "--piece-accent": "#e0b44b",
+    "--piece-rail-edge": "#e0b44b",
+    "--piece-select-glow": "color-mix(in srgb, #e0b44b 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#e0b44b",
+    "accentMuted": "#8a6c28",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.status-dot-pulse",
+    "idle": null
+  },
+  "glyphDefault": "activity"
+}

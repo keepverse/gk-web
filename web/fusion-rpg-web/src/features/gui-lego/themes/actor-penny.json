@@ -1,0 +1,21 @@
+{
+  "themeId": "actor.penny",
+  "kind": "actor",
+  "id": "penny",
+  "css": {
+    "--piece-accent": "#6fb7d4",
+    "--piece-rail-edge": "#6fb7d4",
+    "--piece-nameplate": "#2b4c5c",
+    "--piece-select-glow": "color-mix(in srgb, #6fb7d4 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#6fb7d4",
+    "accentMuted": "#3f7f99",
+    "onAccent": "#07161c"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": null
+}

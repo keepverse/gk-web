@@ -1,0 +1,20 @@
+{
+  "themeId": "element.earth",
+  "kind": "element",
+  "id": "earth",
+  "css": {
+    "--piece-accent": "var(--el-earth)",
+    "--piece-rail-edge": "var(--el-earth)",
+    "--piece-select-glow": "color-mix(in srgb, #b08a4f 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#b08a4f",
+    "accentMuted": "#6e5530",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.earth-pulse",
+    "idle": null
+  },
+  "glyphDefault": "mountain"
+}

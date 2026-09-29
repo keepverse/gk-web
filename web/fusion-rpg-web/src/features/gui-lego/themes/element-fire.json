@@ -1,0 +1,20 @@
+{
+  "themeId": "element.fire",
+  "kind": "element",
+  "id": "fire",
+  "css": {
+    "--piece-accent": "var(--el-fire)",
+    "--piece-rail-edge": "var(--el-fire)",
+    "--piece-select-glow": "color-mix(in srgb, #e0703c 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#e0703c",
+    "accentMuted": "#a04a28",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.ember-pulse",
+    "idle": null
+  },
+  "glyphDefault": "flame"
+}

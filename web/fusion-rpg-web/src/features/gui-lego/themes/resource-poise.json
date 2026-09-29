@@ -1,0 +1,20 @@
+{
+  "themeId": "resource.poise",
+  "kind": "resource",
+  "id": "poise",
+  "css": {
+    "--piece-accent": "#7f8c8d",
+    "--piece-rail-edge": "#7f8c8d",
+    "--piece-select-glow": "color-mix(in srgb, #7f8c8d 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#7f8c8d",
+    "accentMuted": "#4a5253",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.resource-poise-pulse",
+    "idle": null
+  },
+  "glyphDefault": "shield"
+}

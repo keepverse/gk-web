@@ -1,0 +1,20 @@
+{
+  "themeId": "element.ice",
+  "kind": "element",
+  "id": "ice",
+  "css": {
+    "--piece-accent": "var(--el-ice)",
+    "--piece-rail-edge": "var(--el-ice)",
+    "--piece-select-glow": "color-mix(in srgb, #6fc4d9 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#6fc4d9",
+    "accentMuted": "#3a7a8a",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.frost-pulse",
+    "idle": null
+  },
+  "glyphDefault": "snowflake"
+}

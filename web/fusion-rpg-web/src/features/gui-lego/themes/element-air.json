@@ -1,0 +1,20 @@
+{
+  "themeId": "element.air",
+  "kind": "element",
+  "id": "air",
+  "css": {
+    "--piece-accent": "var(--el-air)",
+    "--piece-rail-edge": "var(--el-air)",
+    "--piece-select-glow": "color-mix(in srgb, #b7c9d6 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#b7c9d6",
+    "accentMuted": "#6a7884",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.air-pulse",
+    "idle": null
+  },
+  "glyphDefault": "wind"
+}

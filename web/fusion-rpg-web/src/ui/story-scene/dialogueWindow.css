@@ -1,0 +1,47 @@
+/**
+ * `dialogue-window` — the say window.
+ *
+ * Scoped under `.story-dialogue-window` (piece-contract §7: every rule under its own root class, never
+ * a global selector, never a stacking tier). Layout and readability only; paint comes from the pack's
+ * custom properties and the `name-tag` inside owns speaker identity.
+ *
+ * Deliberately **absent**: `text-overflow: ellipsis`, `white-space: nowrap`, and any `overflow-y` other
+ * than `visible`. A truncated dialogue line is a defect, and a scrolling say window is the text-wall
+ * failure the design exists to prevent — the window grows to a bounded height and wraps instead.
+ */
+
+.story-dialogue-window {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border-control);
+  border-radius: 0.375rem;
+  /* `--scene-window` is the name the scene packs actually declare; `--color-panel` is the fallback
+     for a scene whose pack is missing (the neutral fallback). */
+  background: var(--scene-window, var(--color-panel));
+  text-align: left;
+}
+
+.story-dialogue-window__nameTag {
+  align-self: flex-start;
+}
+
+.story-dialogue-window__line {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.5;
+  /* Long words break rather than overflow the window. */
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+/* Visually subordinate to the line: smaller and lower-contrast, never the same weight. */
+.story-dialogue-window__teaching {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}

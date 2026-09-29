@@ -1,0 +1,42 @@
+{
+  "surfaceId": "shield-console",
+  "host": "actor-panel-tab",
+  "version": 1,
+  "notes": "Shield tab: drain-order stack bar + layer inspect + omni combat.shield.* rows. No three permanent Empty wells.",
+  "root": {
+    "piece": "surface-shell",
+    "instanceId": "shell:shield",
+    "bind": "vm",
+    "slots": {
+      "main": [
+        {
+          "piece": "shield-stack-bar",
+          "instanceId": "shield:stack",
+          "bind": "vm.stack"
+        },
+        {
+          "piece": "shield-layer-inspect",
+          "instanceId": "shield:inspect",
+          "bind": "vm.inspect"
+        },
+        {
+          "piece": "shield-omni-region",
+          "instanceId": "shield:omni",
+          "bind": "vm.omniRegion",
+          "slots": {
+            "rows": {
+              "$bindArray": "rows",
+              "piece": "channel-row",
+              "instanceIdTemplate": "shield:omni:{channelId}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "lifecycleOverlays": {
+    "loading": { "piece": "phase-loading", "bind": "vm.phasePayload" },
+    "error": { "piece": "phase-error", "bind": "vm.phasePayload" },
+    "pendingField": { "piece": "phase-pending", "bind": "field.phase" }
+  }
+}

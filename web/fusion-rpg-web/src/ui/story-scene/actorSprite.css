@@ -1,0 +1,72 @@
+/**
+ * `actor-sprite` — the sprite, or an honest labelled shape when the art is missing.
+ *
+ * Scoped under `.story-actor-sprite` (the piece-contract CSS rule: every rule under its own root
+ * class, never a global selector, and never a stacking tier). Paint comes from the pack's css custom
+ * properties — this file owns **layout and draft fidelity**, the pack owns **paint**, so there are no
+ * colour literals here.
+ *
+ * Token names are the real `--color-*` family from `theme/tokens.css`. Fallbacks use
+ * `currentColor`/`transparent` rather than the bare `--text`/`--muted` names some older piece CSS
+ * carries: those are never defined anywhere in the tree, so a fallback to them resolves to nothing
+ * and the declaration is silently dropped. `--piece-accent` is always supplied by the actor packs,
+ * so the accent path never needs a fallback in practice.
+ */
+
+.story-actor-sprite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-actor-sprite__art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--piece-accent, currentColor) 40%, transparent));
+}
+
+.story-actor-sprite__placeholder {
+  display: flex;
+  width: 160px;
+  height: 160px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 2px dashed var(--piece-accent, var(--color-border));
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--piece-accent, transparent) 12%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--piece-accent, currentColor) 25%, transparent);
+  text-align: center;
+}
+
+.story-actor-sprite__initial {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--piece-accent, var(--color-border));
+  border-radius: 9999px;
+  color: var(--piece-accent, currentColor);
+  font-family: var(--font-display, inherit);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* The actor's name is the "honest" half of the fallback: visible, not sr-only, because the point is
+   that a human sees *who* is missing. */
+.story-actor-sprite__name {
+  color: var(--piece-accent, currentColor);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.story-actor-sprite__hint {
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

@@ -1,0 +1,20 @@
+{
+  "themeId": "posture.finesse",
+  "kind": "posture",
+  "id": "finesse",
+  "css": {
+    "--piece-accent": "#5a9e9a",
+    "--piece-rail-edge": "#5a9e9a",
+    "--piece-select-glow": "color-mix(in srgb, #5a9e9a 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#5a9e9a",
+    "accentMuted": "#3a6a67",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.posture-finesse-pulse",
+    "idle": null
+  },
+  "glyphDefault": "wind"
+}

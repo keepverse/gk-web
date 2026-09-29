@@ -1,0 +1,474 @@
+.condition-console.console,
+.condition-console {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    "prog identity"
+    "hero stand";
+  gap: 16px;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  color: var(--text);
+  align-items: stretch;
+}
+
+.condition-console > .progression-gauge,
+.condition-console [data-grid-area="prog"] {
+  grid-area: prog;
+}
+
+.condition-console > .actor-identity,
+.condition-console [data-grid-area="identity"] {
+  grid-area: identity;
+}
+
+.condition-console > .cond-hero,
+.condition-console [data-grid-area="hero"] {
+  grid-area: hero;
+  min-height: 0;
+}
+
+.condition-console > .stand-row,
+.condition-console [data-grid-area="stand"] {
+  grid-area: stand;
+  min-height: 0;
+}
+
+/* RecipeMount may wrap pieces — target direct main children via slot host if present */
+.condition-console .surface-main,
+.condition-console [data-slot="main"] {
+  display: contents;
+}
+
+.condition-console .progression-gauge,
+.condition-console .actor-identity,
+.condition-console .cond-hero,
+.condition-console .stand-row {
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-md);
+  background:
+    linear-gradient(180deg, rgb(51 43 33 / 0.55), rgb(18 15 12 / 0.35)),
+    var(--panel);
+  box-shadow: inset 0 1px 0 rgb(242 234 216 / 0.06);
+  min-width: 0;
+}
+
+.condition-console .progression-gauge {
+  padding: 14px 16px;
+}
+
+.condition-console .progression-gauge .hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.condition-console .eyebrow,
+.condition-console .spec-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.condition-console .progression-gauge .level {
+  font-weight: 700;
+}
+
+.condition-console .xp-line {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.condition-console .track,
+.condition-console .bar .t {
+  display: block;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--soil-raised);
+  border: 1px solid var(--border-control);
+}
+
+.condition-console .progression-gauge .track {
+  margin-top: 8px;
+  height: 14px;
+  min-height: 14px;
+  background: var(--color-panel-inset);
+  border: 1px solid var(--border-control);
+}
+
+.condition-console .fill,
+.condition-console .bar .f {
+  display: block;
+  height: 100%;
+  transition: width 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .condition-console .fill,
+  .condition-console .bar .f {
+    transition: none;
+  }
+}
+
+.condition-console .progression-gauge .fill {
+  background: var(--sun);
+}
+
+.condition-console .bar .f {
+  /* paint comes from inline style on each axis */
+}
+
+.condition-console .pending-copy {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.condition-console .progression-gauge.is-pending .track,
+.condition-console .meter.is-pending .track,
+.condition-console .radial-wrap.is-pending {
+  opacity: 0.72;
+}
+
+.condition-console .meter.is-pending .track,
+.condition-console .progression-gauge.is-pending .track {
+  min-height: 6px;
+}
+
+.condition-console .actor-identity {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+}
+
+.condition-console .actor-identity .identity-body {
+  min-width: 0;
+  flex: 1;
+}
+
+.condition-console .actor-identity .species-name {
+  margin-top: 4px;
+  font-family: var(--font-display, ui-serif);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.condition-console .actor-identity .badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.condition-console .cond-hero {
+  display: flex;
+  gap: var(--sp-3, 12px);
+  /* Top-align radial + pool meters (same seam as stand-row) — not vertical center */
+  align-items: flex-start;
+  padding: 16px;
+}
+
+.condition-console .hero-radial-stack {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: start;
+  gap: 8px;
+}
+
+.condition-console .radial-wrap {
+  position: relative;
+  display: grid;
+  flex: 0 0 128px;
+  width: 128px;
+  height: 128px;
+  min-width: 128px;
+  min-height: 128px;
+  place-items: center;
+  border: 1px solid var(--border-control);
+  border-radius: 16px;
+  background: var(--panel-inset, rgb(0 0 0 / 0.15));
+}
+
+/* Kit radial — plate 13 / _kit/kit.css */
+.condition-console .radial-wrap .radial {
+  --p: 0;
+  --c: var(--color-bad);
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: conic-gradient(var(--c) calc(var(--p) * 1%), var(--color-panel-inset) 0);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--sh-inset, none);
+}
+
+.condition-console .radial-wrap .radial::after {
+  content: "";
+  width: 66%;
+  height: 66%;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.condition-console .radial-wrap .radial-hp {
+  position: absolute;
+}
+
+.condition-console .radial-wrap .n {
+  position: absolute;
+  /* No z-index (band GG-5): the number is absolute and last in DOM, while the radial plate
+     and its ::after are non-positioned — positioned always paints above non-positioned
+     (CSS step 6 vs steps 3-5), so a tier here was redundant. Verified 2026-09-16. */
+  font-family: var(--font-mono, ui-monospace);
+  font-size: var(--text-xs, 12px);
+  font-weight: 800;
+}
+
+.condition-console .pool-col {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-self: start;
+  min-width: 0;
+  min-height: 0;
+  gap: 4px;
+  overflow: auto;
+}
+
+.condition-console .meter {
+  display: block;
+  width: 100%;
+  padding: 4px 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.condition-console .meter.is-on .cap span:first-child {
+  color: var(--sun);
+}
+
+.condition-console .meter .cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: var(--text-2xs, 12px);
+}
+
+.condition-console .meter .cap-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.condition-console .meter .meter-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.condition-console .meter .cap b {
+  color: var(--text);
+  font-family: var(--font-mono, ui-monospace);
+  font-weight: 700;
+}
+
+.condition-console .meter .track {
+  display: block;
+  height: var(--meter-h, 6px);
+  margin-top: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--panel-inset);
+  border: 1px solid var(--border-control);
+}
+
+.condition-console .meter .fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--lawn-hot, var(--sun));
+}
+
+.condition-console .meter[data-pool="hp"] .fill {
+  background: var(--color-bad);
+}
+
+.condition-console .meter[data-pool="stamina"] .fill {
+  background: var(--color-sun);
+}
+
+.condition-console .meter[data-pool="hunger"] .fill {
+  background: var(--color-sun);
+}
+
+.condition-console .meter[data-pool="spirit"] .fill {
+  background: var(--color-info);
+}
+
+.condition-console .meter[data-pool="qi"] .fill {
+  background: var(--color-el-light);
+}
+
+.condition-console .meter[data-pool="poise"] .fill {
+  background: var(--color-el-air);
+}
+
+.condition-console .stand-row {
+  display: grid;
+  /* CG-D1: radar column hugs 200px chart; bars take remainder — one top-aligned row */
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  padding: 16px;
+}
+
+.condition-console .radar-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 200px;
+  width: max-content;
+  overflow: visible;
+}
+
+.condition-console .standing-radar-chart,
+.condition-console .radar-fallback {
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.condition-console .live-col {
+  min-width: 0;
+  min-height: 0;
+  /* Width bandage forbidden — overflow-x hidden; vertical scroll only when bars+strip exceed height */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.condition-console .bar b {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  min-width: 2.5ch;
+}
+
+.condition-console .pw {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.condition-console .bar {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, max-content) minmax(0, 1fr) minmax(4.5rem, max-content);
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.condition-console .bar > span:first-child {
+  white-space: nowrap;
+}
+
+.condition-console .bar .t {
+  height: 8px;
+}
+
+.condition-console .status-strip {
+  margin-top: 12px;
+}
+
+.condition-console .glyph-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.condition-console .status-glyph {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--border-control);
+  background: rgb(0 0 0 / 0.18);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.condition-console .status-glyph .ring {
+  position: absolute;
+  inset: 3px;
+  border-radius: 10px;
+  border: 2px solid var(--glyph-color, var(--sun));
+}
+
+.condition-console .tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--border-control);
+}
+
+.condition-sheet-retry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--r-md);
+  background: rgb(180 70 70 / 0.12);
+  font-size: 13px;
+}
+
+.condition-sheet-retry button {
+  padding: 6px 12px;
+  border: 1px solid var(--border-control);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .condition-console.console,
+  .condition-console {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "prog"
+      "identity"
+      "hero"
+      "stand";
+    height: auto;
+  }
+
+  .condition-console .cond-hero,
+  .condition-console .stand-row {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+}

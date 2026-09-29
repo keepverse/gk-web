@@ -1,0 +1,19 @@
+{
+  "themeId": "bucket.neg",
+  "kind": "bucket",
+  "id": "neg",
+  "css": {
+    "--piece-accent": "#c05050",
+    "--piece-rail-edge": "#c05050",
+    "--piece-select-glow": "color-mix(in srgb, #c05050 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#c05050",
+    "accentMuted": "#7a3030",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  }
+}

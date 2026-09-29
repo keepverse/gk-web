@@ -1,0 +1,20 @@
+{
+  "themeId": "element.light",
+  "kind": "element",
+  "id": "light",
+  "css": {
+    "--piece-accent": "var(--el-light)",
+    "--piece-rail-edge": "var(--el-light)",
+    "--piece-select-glow": "color-mix(in srgb, #efdca0 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#efdca0",
+    "accentMuted": "#9a8a55",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.light-pulse",
+    "idle": null
+  },
+  "glyphDefault": "sun"
+}

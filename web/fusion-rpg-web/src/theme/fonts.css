@@ -1,0 +1,10 @@
+/* Self-hosted (T7) — replaces the live Google Fonts CDN request this file used to make, which broke
+   the offline promise (deploy-play.py has no network dependency; a player without connectivity
+   should still see real type, not a system-font fallback). Latin-only subsets:
+   --font-display/--font-ui/--font-content (theme/tokens.css, generated from the kit) already carry
+   an explicit CJK fallback stack for non-Latin text, so the CJK glyph sets from these two families
+   are not needed. */
+@import "@fontsource/lilita-one/latin-400.css";
+@import "@fontsource/nunito/latin-400.css";
+@import "@fontsource/nunito/latin-600.css";
+@import "@fontsource/nunito/latin-700.css";

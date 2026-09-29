@@ -1,0 +1,20 @@
+{
+  "themeId": "action-category.defense",
+  "kind": "action-category",
+  "id": "defense",
+  "css": {
+    "--piece-accent": "#6a9e7a",
+    "--piece-rail-edge": "#6a9e7a",
+    "--piece-select-glow": "color-mix(in srgb, #6a9e7a 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#6a9e7a",
+    "accentMuted": "#3d5c48",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.action-defense-pulse",
+    "idle": null
+  },
+  "glyphDefault": "shield"
+}

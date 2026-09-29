@@ -1,0 +1,28 @@
+{
+  "surfaceId": "aptitude-preset-console",
+  "host": "nested-panel",
+  "version": 2,
+  "notes": "AS-3.4 nested Aptitude presets — gallery, dual-constraint editor, recharts donut. Actions live in PanelShell footer (sticky on mobile). Activate via host → activate API only (S3).",
+  "root": {
+    "piece": "preset-console-layout",
+    "instanceId": "preset:layout",
+    "bind": "vm.layout",
+    "slots": {
+      "gallery": {
+        "piece": "preset-gallery",
+        "instanceId": "preset:gallery",
+        "bind": "vm.gallery"
+      },
+      "editor": {
+        "piece": "preset-editor",
+        "instanceId": "preset:editor",
+        "bind": "vm.editor"
+      },
+      "chart": {
+        "piece": "preset-distribution-chart",
+        "instanceId": "preset:chart",
+        "bind": "vm.chart"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "themeId": "action-category.status",
+  "kind": "action-category",
+  "id": "status",
+  "css": {
+    "--piece-accent": "#c87850",
+    "--piece-rail-edge": "#c87850",
+    "--piece-select-glow": "color-mix(in srgb, #c87850 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#c87850",
+    "accentMuted": "#7a4a30",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.action-status-pulse",
+    "idle": null
+  },
+  "glyphDefault": "activity"
+}

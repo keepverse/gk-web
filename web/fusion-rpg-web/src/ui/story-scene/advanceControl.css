@@ -1,0 +1,43 @@
+/**
+ * `advance-control` — the scene's two verbs and their states.
+ *
+ * Scoped under `.story-advance-control` (piece-contract §7: every rule under its own root class, never
+ * a global selector, never a stacking tier). Layout only — the button chrome comes from the shared kit
+ * `Button`, and paint from the pack's custom properties.
+ *
+ * The target-size floor reads `--story-touch-target-min`, which the **piece sets from
+ * `storySceneTokens.STORY_SCENE_TOUCH_TARGET_MIN_PX`** — so the number has one home and this file
+ * carries no literal copy of it. A scene's advance control is the one thing a player must always be
+ * able to hit, so it is never the element that shrinks to make room; hence no `@media` shrink.
+ */
+
+.story-advance-control {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* The error variant stacks its status line above the recovery row. */
+.story-advance-control[data-error="true"] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.story-advance-control__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.story-advance-control__recovery {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.story-advance-control .story-advance-control__row > button,
+.story-advance-control > button {
+  min-height: var(--story-touch-target-min, 44px);
+}

@@ -1,0 +1,248 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-08-23 18:58+0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: pseudo\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:172
+msgid "actor.penny.name"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:40
+msgid "onboarding.reveal.title.gear"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:34
+msgid "onboarding.reveal.title.dave"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:171
+msgid "actor.dave.name"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:78
+msgid "story-scene.sprite.placeholder"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:55
+msgid "scene.rift-prologue.subtitle"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:57
+msgid "onboarding.reveal.ack.title"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:41
+msgid "story-scene.chrome.final"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:150
+msgid "scene.rift-prologue.beat4.teaching"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:77
+msgid "story-scene.sprite.hint"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:158
+#: src/i18n/index.test.ts:57
+msgid "scene.rift-prologue.progress"
+msgstr ""
+
+#: src/stages/siege/SiegeStage.tsx:49
+msgid "Board layer"
+msgstr ""
+
+#: src/stages/lawn/LawnStage.tsx:109
+msgid "Board layers arrive with a later pass — this one exists to prove they can open over the live game without resetting it."
+msgstr ""
+
+#: src/stages/lawn/LawnStage.tsx:99
+#: src/stages/lawn/LawnStage.tsx:104
+msgid "Board panel"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:139
+msgid "scene.rift-prologue.beat3.teaching"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:44
+msgid "story-scene.chrome.bypass"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/FocusCard.tsx:18
+msgid "sanctum.focus.firstRun.job"
+msgstr ""
+
+#: src/stages/delve/DelveStage.tsx:137
+msgid "Delve"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:46
+msgid "onboarding.reveal.body.species"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:54
+msgid "onboarding.reveal.ack"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:64
+msgid "onboarding.reveal.loading"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:33
+msgid "onboarding.reveal.kicker"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:40
+msgid "story-scene.chrome.next"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:59
+msgid "onboarding.reveal.open.sheet"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:45
+msgid "onboarding.reveal.title.fallback"
+msgstr ""
+
+#: src/stages/lawn/LawnStage.tsx:105
+msgid "Proves a panel can open here without disturbing the board"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:66
+msgid "onboarding.reveal.retry"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:43
+msgid "story-scene.chrome.retry"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:56
+msgid "onboarding.reveal.saving.title"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:55
+msgid "onboarding.reveal.saving"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:45
+msgid "story-scene.chrome.pending"
+msgstr ""
+
+#: src/stages/siege/SiegeStage.tsx:36
+msgid "Siege"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:58
+msgid "onboarding.reveal.skip"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:42
+msgid "story-scene.chrome.skip"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:120
+msgid "scene.rift-prologue.beat1.teaching"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:127
+msgid "scene.rift-prologue.beat2.line"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:128
+msgid "scene.rift-prologue.beat2.teaching"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:54
+msgid "scene.rift-prologue.title"
+msgstr ""
+
+#: src/stages/siege/SiegeStage.tsx:40
+msgid "The siege board arrives with a later pass — this stage exists to prove the route, the layer-in-URL contract and the shell wiring work before the board does."
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:146
+msgid "scene.rift-prologue.beat4.line"
+msgstr ""
+
+#: src/stages/siege/SiegeStage.tsx:53
+msgid "This layer arrives with a later pass."
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:50
+msgid "onboarding.reveal.body.default"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:116
+msgid "scene.rift-prologue.beat1.line"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:135
+msgid "scene.rift-prologue.beat3.line"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:65
+msgid "onboarding.reveal.error"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/features/story-scene/messages.ts:46
+msgid "story-scene.chrome.ackFailed"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/FocusCard.tsx:13
+msgid "sanctum.focus.firstRun.meet"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/stages/sanctum/OnboardingReveal.tsx:39
+msgid "onboarding.reveal.title.species"
+msgstr ""

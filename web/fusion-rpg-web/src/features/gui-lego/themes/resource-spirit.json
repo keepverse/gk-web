@@ -1,0 +1,20 @@
+{
+  "themeId": "resource.spirit",
+  "kind": "resource",
+  "id": "spirit",
+  "css": {
+    "--piece-accent": "#9b59b6",
+    "--piece-rail-edge": "#9b59b6",
+    "--piece-select-glow": "color-mix(in srgb, #9b59b6 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#9b59b6",
+    "accentMuted": "#5c3670",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.resource-spirit-pulse",
+    "idle": null
+  },
+  "glyphDefault": "sparkles"
+}

@@ -1,0 +1,19 @@
+{
+  "themeId": "bucket.base",
+  "kind": "bucket",
+  "id": "base",
+  "css": {
+    "--piece-accent": "#6b6358",
+    "--piece-rail-edge": "#6b6358",
+    "--piece-select-glow": "color-mix(in srgb, #6b6358 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#6b6358",
+    "accentMuted": "#4a443c",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  }
+}

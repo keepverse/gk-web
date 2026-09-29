@@ -1,0 +1,19 @@
+{
+  "themeId": "bucket.aptitude",
+  "kind": "bucket",
+  "id": "aptitude",
+  "css": {
+    "--piece-accent": "#6fc4d9",
+    "--piece-rail-edge": "#6fc4d9",
+    "--piece-select-glow": "color-mix(in srgb, #6fc4d9 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#6fc4d9",
+    "accentMuted": "#3a7a88",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  }
+}

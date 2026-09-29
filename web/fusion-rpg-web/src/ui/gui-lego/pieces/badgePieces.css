@@ -1,0 +1,75 @@
+/* Shared badge / shield-status piece chrome (Condition + ActorPanel rail). */
+
+.element-badge,
+.phase-badge,
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid color-mix(in srgb, var(--piece-accent, var(--border-control)) 50%, var(--border-control));
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--piece-accent, var(--text));
+  background: color-mix(in srgb, var(--piece-accent, transparent) 12%, var(--panel-inset, rgb(0 0 0 / 0.12)));
+}
+
+.element-badge,
+.phase-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.element-badge-glyph {
+  width: 12px;
+  height: 12px;
+}
+
+.role-badge {
+  padding: 2px 8px;
+  border-radius: 6px;
+  border-left-width: 3px;
+  border-left-color: var(--piece-rail-edge, var(--piece-accent, var(--border-control)));
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.shield-status {
+  min-width: 132px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--piece-accent, var(--border-control)) 40%, var(--border-control));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--piece-accent, transparent) 10%, var(--panel-inset, rgb(0 0 0 / 0.12)));
+  color: var(--text);
+}
+
+.shield-status .eyebrow {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--piece-accent, var(--muted));
+}
+
+.shield-status .hp {
+  margin: 4px 0 0;
+  font-family: var(--font-mono, ui-monospace);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.shield-status .stacks {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .element-badge[class*="vfx-"],
+  .phase-badge[class*="vfx-"],
+  .role-badge[class*="vfx-"] {
+    animation: none !important;
+  }
+}

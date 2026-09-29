@@ -1,0 +1,180 @@
+/* GENERATED — do not hand-edit. Source: docs/design/_kit/tokens.css.
+   Run `node scripts/gen-tokens.mjs` after changing the kit; `node scripts/gen-tokens.mjs --check`
+   (wired into the test suite, T7) fails if this file has drifted from it. */
+@import "tailwindcss";
+
+@theme {
+  --color-soil: #16120e;
+  --color-soil-raised: #221c16;
+  --color-panel: #2a231b;
+  --color-panel-raised: #332b21;
+  --color-panel-inset: #120f0c;
+  --color-scrim: rgb(11 9 7 / 0.72);
+  --color-text: #f2ead8;
+  --color-muted: #a89880;
+  --color-faint: #7d7060;
+  --color-ink-dark: #16120e;
+  --color-almanac: #e4d5b5;
+  --color-lawn: #3d6b45;
+  --color-lawn-hot: #5a8f62;
+  --color-zombie: #6e5a7a;
+  --color-sun: #e0b44b;
+  --color-ok: #6fbf73;
+  --color-warn: #d8a94f;
+  --color-bad: #d97b7b;
+  --color-bad-solid: #a33c3c;
+  --color-info: #7fa8c9;
+  --color-border: #4a4034;
+  --color-border-control: #7a6d59;
+  --color-border-strong: #9c8c72;
+  --color-el-fire: #e0703c;
+  --color-el-ice: #6fc4d9;
+  --color-el-air: #b7c9d6;
+  --color-el-earth: #b08a4f;
+  --color-el-light: #efdca0;
+  --color-el-dark: #8b7bab;
+  --color-el-omni: #a89880;
+  --color-side-plant: #6fbf73;
+  --color-side-zombie: #9b7fb0;
+  --color-side-creature: #c96a52;
+  --color-rarity-1: #8f8878;
+  --color-rarity-2: #6fbf73;
+  --color-rarity-3: #6fa8d9;
+  --color-rarity-4: #b98ede;
+  --color-rarity-5: #e0b44b;
+  --color-rarity-chaff: #63645d;
+  --color-rarity-sprout: #697a5c;
+  --color-rarity-grafted: #509639;
+  --color-rarity-cultivated: #37a39c;
+  --color-rarity-fused: #63a4ed;
+  --color-rarity-chimeric: #c994ff;
+  --color-rarity-heirloom: #ff94d2;
+  --color-rarity-firstseed: #ffab7a;
+  --color-rarity-sunwoven: #f9d464;
+  --color-rarity-almanac: #f3eaa0;
+  --color-pw-offense: #d97b7b;
+  --color-pw-survivability: #6fbf73;
+  --color-pw-control: #b98ede;
+  --color-pw-utility: #6fa8d9;
+  --color-pw-economy: #e0b44b;
+  --font-display: "Lilita One", "Segoe UI", system-ui, var(--cjk);
+  --font-ui: "Nunito", "Segoe UI", system-ui, var(--cjk);
+  --font-content: "Nunito", "Segoe UI", var(--cjk);
+  --font-mono: ui-monospace, Consolas, "Cascadia Mono", monospace, var(--cjk);
+  --text-2xs: 0.625rem;
+  --text-xs: 0.6875rem;
+  --text-sm: 0.75rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-display: 1.75rem;
+  --text-hero: 2.5rem;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 3rem;
+  --spacing-12: 4rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-pill: 999px;
+  --shadow-panel: 0 2px 8px rgb(0 0 0 / 0.35);
+  --shadow-layer: 0 12px 32px rgb(0 0 0 / 0.5);
+  --shadow-inset: inset 0 1px 3px rgb(0 0 0 / 0.45);
+  --shadow-glow: 0 0 0 2px rgb(224 180 75 / 0.35);
+}
+
+/* Band stacking (GG-5) and other tokens the kit declares but that aren't a Tailwind
+   utility axis — consumed via var(), not a generated class, except the six band-*
+   classes below. Shell (band -1) has no token: it replaces the stage rather than
+   stacking over it, so it never needs to coordinate z-order with anything else. */
+:root {
+  --cjk: "Noto Sans SC", "Source Han Sans SC", "PingFang SC",
+         "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --lh-tight: 1.15;
+  --lh-body: 1.45;
+  --band-stage: 0;
+  --band-scrim: 50;
+  --band-hud: 100;
+  --band-panel: 200;
+  --band-dialog: 300;
+  --band-toast: 400;
+  --band-system: 500;
+  --dur-instant: 80ms;
+  --dur-quick: 120ms;
+  --dur-layer: 180ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --icon-token: 20px;
+  --icon-chip: 24px;
+  --icon-row: 32px;
+  --icon-card: 56px;
+  --icon-panel: 88px;
+  --control-h: 32px;
+  --meter-h: 8px;
+}
+
+.band-stage { z-index: var(--band-stage); }
+.band-scrim { z-index: var(--band-scrim); }
+.band-hud { z-index: var(--band-hud); }
+.band-panel { z-index: var(--band-panel); }
+.band-dialog { z-index: var(--band-dialog); }
+.band-toast { z-index: var(--band-toast); }
+.band-system { z-index: var(--band-system); }
+
+/* Notch / home-indicator insets (lawn HUD / commander bar T13). */
+.safe-area-top {
+  padding-top: max(0px, env(safe-area-inset-top, 0px));
+}
+.safe-area-bottom {
+  padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
+}
+
+:root {
+  color: var(--color-text);
+  background: var(--color-soil);
+  font-family: var(--font-ui);
+  font-size: var(--text-md);
+  line-height: var(--lh-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-soil);
+  color: var(--color-text);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sun);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

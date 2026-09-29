@@ -1,0 +1,165 @@
+/*
+ * The scene's own paint layer (found and built 2026-09-04, closing half of the wiring gap this
+ * program named repeatedly — W50's own finding: `sectorChannels.ts`/`fogTreatments.ts`/
+ * `laneChannels.ts` emit real, tested semantic data attributes with no stylesheet ever consuming
+ * them). `SectorNode.tsx`'s own doc comment already states the intended design — "every colour is
+ * `channels.token`, a named class... rendered as a data attribute a stylesheet keys off" — this is
+ * that stylesheet, not a deviation from the plan.
+ *
+ * Deliberately minimal, not the full polished design: ownership colour, a real card boundary,
+ * lane stroke colour, and the two fog washes are enough to make the map genuinely visible and
+ * legible in a real browser (proven in `e2e/world-stage.spec.ts`) — the pattern hatches
+ * (`hatch-fine`/`hatch-heavy`/`flat-desaturated`) and slot silhouette shapes are real, tested data
+ * today but still render as plain text/borders rather than the designed patterns, honestly left
+ * for a dedicated visual pass rather than rushed here.
+ */
+
+[data-shape="card"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  border-width: 2px;
+  border-color: var(--color-border);
+  background: var(--color-panel);
+  overflow: hidden;
+}
+
+[data-shape="unknown"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed var(--color-border);
+  background: var(--color-soil-raised);
+}
+
+[data-border-style="dashed"] {
+  border-style: dashed;
+}
+
+[data-border-weight="heavy-left"] {
+  border-left-width: 6px;
+}
+
+[data-token="ownership-mine"] {
+  border-color: var(--color-side-plant);
+}
+
+[data-token="ownership-enemy"] {
+  border-color: var(--color-side-zombie);
+}
+
+[data-token="ownership-neutral"] {
+  border-color: var(--color-border);
+}
+
+[data-token="ownership-contested"] {
+  border-color: var(--color-warn);
+}
+
+/* Lane stroke colour — `Lane.tsx`'s own `<path>` carries no paint of its own by design (the
+   component's job is geometry/dash/markers, per its own doc comment); the parent `<g data-token>`
+   is what this keys off. */
+g[data-token="lane-open"] path {
+  stroke: var(--color-ok);
+}
+
+g[data-token="lane-severed"] path {
+  stroke: var(--color-bad);
+}
+
+g[data-token="lane-warded"] path {
+  stroke: var(--color-info);
+}
+
+g[data-token="lane-hazardous"] path {
+  stroke: var(--color-bad-solid);
+}
+
+g[data-token] text {
+  fill: var(--color-text);
+}
+
+/* Fog washes — the two stale states share one tint mechanism, opacity-capped at the exact
+   percentages §8.2 priced (`fogTreatments.ts`'s own `washCapPercent`). */
+[data-wash="parchment"] {
+  background: rgb(224 180 75 / 0.13);
+}
+
+[data-wash="torn"] {
+  background: rgb(122 109 89 / 0.18);
+}
+
+/* A force at rest (world-stage W71) — `ForceMarker.tsx`'s own doc comment: three shapes before
+   three colours is the established convention (`LegionMarker`'s own rule), but a fixed circle glyph
+   plus this token's colour is enough for a marker that never moves and never needs to read at a
+   glance from across the whole map the way a sector card does. */
+[data-token="force-mine"] {
+  fill: var(--color-side-plant);
+  stroke: var(--color-panel);
+  stroke-width: 1.5;
+}
+
+[data-token="force-enemy"] {
+  fill: var(--color-side-zombie);
+  stroke: var(--color-panel);
+  stroke-width: 1.5;
+}
+
+g[data-testid^="legion-marker-"] text {
+  fill: var(--color-panel);
+  font-size: 9px;
+}
+
+/* A selected force's own ring — distinct from a sector's `data-selected` border and from the range
+   overlay's own reachable-ring treatment below, so the three never read as the same fact. */
+g[data-testid^="legion-marker-"][data-selected="true"] circle {
+  stroke: var(--color-ok);
+  stroke-width: 3;
+}
+
+/* The range overlay's reachable ring (world-stage W69, positioned for real by W71). Found live,
+   not assumed: rendered after every sector in paint order, it sat *on top of* the sector cards it
+   was drawn over and silently ate their clicks — Playwright's own "subtree intercepts pointer
+   events" failure caught it. It is drawn to teach the rule, never to be its own click target — the
+   sector beneath it is, and always was — so the whole overlay is inert to the pointer. */
+g[data-testid="range-overlay"] {
+  pointer-events: none;
+}
+
+g[data-testid="range-overlay"] circle {
+  stroke: var(--color-ok);
+}
+
+g[data-testid="range-overlay"] text {
+  fill: var(--color-ok);
+  font-size: 11px;
+}
+
+/* A queued march's own lit route and destination flag — deliberately a third stroke treatment,
+   distinct from `lane-open` above (a normal, unremarked road) and from the range overlay's own ring
+   (a "you could go here", not "you have filed to go here"). Reuses this file's own `data-token`
+   convention rather than a new styling mechanism. Also inert to the pointer, the same reason as the
+   range overlay above — it is a fact about a queued order, never a click target of its own. */
+g[data-token="lane-route-queued"] {
+  pointer-events: none;
+}
+
+g[data-token="lane-route-queued"] path {
+  stroke: var(--color-info);
+  stroke-dasharray: 4 4;
+}
+
+g[data-testid^="destination-flag-"] {
+  pointer-events: none;
+}
+
+g[data-testid^="destination-flag-"] text {
+  fill: var(--color-info);
+  font-size: 18px;
+}

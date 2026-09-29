@@ -1,0 +1,20 @@
+{
+  "themeId": "side.plant",
+  "kind": "side",
+  "id": "plant",
+  "css": {
+    "--piece-accent": "var(--side-plant)",
+    "--piece-rail-edge": "var(--side-plant)",
+    "--piece-select-glow": "color-mix(in srgb, #6fbf73 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#6fbf73",
+    "accentMuted": "#3d7a42",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": null
+}

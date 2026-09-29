@@ -1,0 +1,20 @@
+{
+  "themeId": "cook-tab.elements",
+  "kind": "cook-tab",
+  "id": "elements",
+  "css": {
+    "--piece-accent": "#e0703c",
+    "--piece-rail-edge": "#e0703c",
+    "--piece-select-glow": "color-mix(in srgb, #e0703c 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#e0703c",
+    "accentMuted": "#a04a28",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.cook-elements-pulse",
+    "idle": null
+  },
+  "glyphDefault": "flame"
+}

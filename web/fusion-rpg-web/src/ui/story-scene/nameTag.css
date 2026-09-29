@@ -1,0 +1,43 @@
+/**
+ * `name-tag` — the current speaker's label, painted by the actor's pack.
+ *
+ * Scoped under `.story-name-tag` (piece-contract §7: every rule under its own root class, never a
+ * global selector, never a stacking tier). This file owns **layout and typography**; the pack owns
+ * **paint**, so the colour arrives as `--piece-accent` and there are no colour literals here.
+ *
+ * ## Why accent text on a translucent accent wash
+ *
+ * This is the shipped chip convention (`badgePieces.css:12-13`: `color: var(--piece-accent)` over
+ * `background: color-mix(in srgb, var(--piece-accent) 12%, …)`) and the only treatment that needs no
+ * new pack surface: `themeStyle` spreads a pack's `css` block **only** — never `paint` — so
+ * `paint.onAccent` does not reach the DOM as a variable, and a filled `onAccent`-on-`accent` plate
+ * would require adding a token to all four packs.
+ *
+ * Contrast is computed, not assumed (WCAG 2.1, relative luminance):
+ *   accent text on the 12% wash over the scene bed
+ *     Penny  (themes/actor-penny.json paint.accent)  6.66:1 (rift-portal) / 6.33:1 (quarantine)
+ *     Dave   (themes/actor-dave.json paint.accent)   6.58:1 (rift-portal) / 6.29:1 (quarantine)
+ * All four clear AA for body text (>=4.5). The packs' **muted** accents do not
+ * (4.06 / 3.93 / 3.70 / 3.59), which is why the name is never painted muted.
+ *
+ * Token names are the real `--color-*` family; bare `--text`/`--muted` are defined nowhere in the
+ * tree (a pre-existing dead fallback in older piece CSS) and would silently drop the declaration.
+ */
+
+.story-name-tag {
+  display: inline-block;
+  padding: 0.125rem 0.625rem;
+  border: 1px solid color-mix(in srgb, var(--piece-accent, var(--color-border)) 45%, var(--color-border));
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--piece-accent, transparent) 12%, transparent);
+}
+
+/* Uppercase and tracking are the pack's treatment, expressed here rather than by a hard-coded utility
+   class, so a later scene can restyle the tag by changing the pack rather than this piece. */
+.story-name-tag__label {
+  color: var(--piece-accent, var(--color-text));
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

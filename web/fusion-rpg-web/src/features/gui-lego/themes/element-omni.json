@@ -1,0 +1,20 @@
+{
+  "themeId": "element.omni",
+  "kind": "element",
+  "id": "omni",
+  "css": {
+    "--piece-accent": "var(--el-omni)",
+    "--piece-rail-edge": "var(--el-omni)",
+    "--piece-select-glow": "color-mix(in srgb, #a89880 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#a89880",
+    "accentMuted": "#6a6050",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.omni-pulse",
+    "idle": null
+  },
+  "glyphDefault": "hexagon"
+}

@@ -1,0 +1,169 @@
+{
+  "delveId": 8812,
+  "worldId": "first-light",
+  "state": "Active",
+  "domainId": "the-fen",
+  "raidMode": "pair",
+  "rungId": "r-3",
+  "soulsUnbanked": 140,
+  "revision": 7,
+  "rooms": [
+    {
+      "sectorId": "s-1",
+      "rowIndex": 0,
+      "colIndex": 0,
+      "visited": true,
+      "cleared": true,
+      "keyForLaneId": null,
+      "sight": 2,
+      "kind": "fight",
+      "archetypeId": "arch-entry",
+      "eventId": null,
+      "resolvedKind": "fight",
+      "resolvedArchetypeId": "arch-entry",
+      "floorJson": null
+    },
+    {
+      "sectorId": "s-2",
+      "rowIndex": 0,
+      "colIndex": 1,
+      "visited": true,
+      "cleared": false,
+      "keyForLaneId": null,
+      "sight": 2,
+      "kind": "cache",
+      "archetypeId": "arch-cache",
+      "eventId": null,
+      "resolvedKind": "cache",
+      "resolvedArchetypeId": "arch-cache",
+      "floorJson": "[]"
+    },
+    {
+      "sectorId": "s-3",
+      "rowIndex": 1,
+      "colIndex": 0,
+      "visited": false,
+      "cleared": false,
+      "keyForLaneId": "l-gate",
+      "sight": 1,
+      "kind": "elite",
+      "archetypeId": null,
+      "eventId": null,
+      "resolvedKind": null,
+      "resolvedArchetypeId": null,
+      "floorJson": null
+    },
+    {
+      "sectorId": "s-4",
+      "rowIndex": 1,
+      "colIndex": 1,
+      "visited": false,
+      "cleared": false,
+      "keyForLaneId": null,
+      "sight": 0,
+      "kind": null,
+      "archetypeId": null,
+      "eventId": null,
+      "resolvedKind": null,
+      "resolvedArchetypeId": null,
+      "floorJson": null
+    },
+    {
+      "sectorId": "s-5",
+      "rowIndex": 2,
+      "colIndex": 0,
+      "visited": false,
+      "cleared": false,
+      "keyForLaneId": null,
+      "sight": 1,
+      "kind": "curio",
+      "archetypeId": null,
+      "eventId": null,
+      "resolvedKind": null,
+      "resolvedArchetypeId": null,
+      "floorJson": null
+    },
+    {
+      "sectorId": "s-6",
+      "rowIndex": 0,
+      "colIndex": 2,
+      "visited": false,
+      "cleared": false,
+      "keyForLaneId": null,
+      "sight": 1,
+      "kind": "trap",
+      "archetypeId": null,
+      "eventId": null,
+      "resolvedKind": null,
+      "resolvedArchetypeId": null,
+      "floorJson": null
+    }
+  ],
+  "doors": [
+    {
+      "laneId": "l-gate",
+      "fromSectorId": "s-1",
+      "toSectorId": "s-2",
+      "typeId": "gated",
+      "gateKeyId": "key-copper",
+      "state": 0
+    },
+    {
+      "laneId": "l-1-3",
+      "fromSectorId": "s-1",
+      "toSectorId": "s-3",
+      "typeId": "passage",
+      "gateKeyId": null,
+      "state": 0
+    },
+    {
+      "laneId": "l-3-4",
+      "fromSectorId": "s-3",
+      "toSectorId": "s-4",
+      "typeId": "one-way",
+      "gateKeyId": null,
+      "state": 0
+    },
+    {
+      "laneId": "l-3-5",
+      "fromSectorId": "s-3",
+      "toSectorId": "s-5",
+      "typeId": "secret",
+      "gateKeyId": null,
+      "state": 0
+    },
+    {
+      "laneId": "l-2-6",
+      "fromSectorId": "s-2",
+      "toSectorId": "s-6",
+      "typeId": "passage",
+      "gateKeyId": null,
+      "state": 1
+    }
+  ],
+  "partyPositions": [
+    { "entityId": 501, "atSectorId": "s-1", "onLaneId": null },
+    { "entityId": 502, "atSectorId": null, "onLaneId": "l-1-3" }
+  ],
+  "parties": [
+    {
+      "entityId": 501,
+      "route": ["s-1"],
+      "haul": [],
+      "members": [
+        { "instanceId": "m-1", "pools": { "hp": 80, "stamina": 40 }, "nerveStacks": 0, "downed": false, "downedOnce": false },
+        { "instanceId": "m-2", "pools": { "hp": 65, "stamina": 30 }, "nerveStacks": 1, "downed": false, "downedOnce": false }
+      ],
+      "pack": { "rows": 4, "cols": 6, "cells": [] }
+    },
+    {
+      "entityId": 502,
+      "route": ["s-1"],
+      "haul": [],
+      "members": [
+        { "instanceId": "m-3", "pools": { "hp": 90, "stamina": 50 }, "nerveStacks": 0, "downed": false, "downedOnce": false }
+      ],
+      "pack": { "rows": 4, "cols": 6, "cells": [] }
+    }
+  ]
+}

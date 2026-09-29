@@ -1,0 +1,19 @@
+{
+  "identity": {
+    "tier": "normal",
+    "role": "vanilla",
+    "levelBand": 12,
+    "flags": []
+  },
+  "resources": {
+    "shield": {
+      "hp": 0,
+      "max": 80,
+      "stacks": [{ "element": "fire", "hp": 0, "max": 80 }]
+    }
+  },
+  "statuses": [
+    { "id": "command", "cc": false, "magnitudeBand": "low" }
+  ],
+  "overflow": { "statusCount": 0 }
+}

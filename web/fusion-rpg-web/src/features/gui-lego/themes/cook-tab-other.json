@@ -1,0 +1,20 @@
+{
+  "themeId": "cook-tab.other",
+  "kind": "cook-tab",
+  "id": "other",
+  "css": {
+    "--piece-accent": "#8a8070",
+    "--piece-rail-edge": "#8a8070",
+    "--piece-select-glow": "color-mix(in srgb, #8a8070 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#8a8070",
+    "accentMuted": "#5a5448",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.cook-other-pulse",
+    "idle": null
+  },
+  "glyphDefault": "layers"
+}

@@ -1,0 +1,20 @@
+{
+  "themeId": "resource.hp",
+  "kind": "resource",
+  "id": "hp",
+  "css": {
+    "--piece-accent": "#e74c3c",
+    "--piece-rail-edge": "#e74c3c",
+    "--piece-select-glow": "color-mix(in srgb, #e74c3c 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#e74c3c",
+    "accentMuted": "#8a2e24",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.resource-hp-pulse",
+    "idle": null
+  },
+  "glyphDefault": "heart"
+}

@@ -1,0 +1,62 @@
+{
+  "surfaceId": "aptitudes-console",
+  "host": "actor-panel-tab",
+  "version": 1,
+  "notes": "Mode A/B/C aptitude allocate console. Leftover in hero (D6). Decision strip Cancel fiction (S8). Activate not on confirm.",
+  "root": {
+    "piece": "aptitudes-layout",
+    "instanceId": "aptitudes:layout",
+    "bind": "vm.layout",
+    "slots": {
+      "hero": [
+        {
+          "piece": "aptitude-scope-chip",
+          "instanceId": "aptitudes:scope",
+          "bind": "vm.scopeChip"
+        },
+        {
+          "piece": "leftover-gauge",
+          "instanceId": "aptitudes:leftover",
+          "bind": "vm.leftover"
+        },
+        {
+          "piece": "preset-entry",
+          "instanceId": "aptitudes:preset",
+          "bind": "vm.presetEntry"
+        },
+        {
+          "piece": "auto-assign-rule-strip",
+          "instanceId": "aptitudes:auto-assign",
+          "bind": "vm.autoAssignStrip"
+        },
+        {
+          "piece": "species-build-chrome",
+          "instanceId": "aptitudes:species-chrome",
+          "bind": "vm.speciesChrome"
+        }
+      ],
+      "bands": {
+        "$bindArray": "vm.bands",
+        "piece": "posture-band",
+        "instanceIdTemplate": "aptitudes:band:{postureId}",
+        "slots": {
+          "tiles": {
+            "$bindArray": "tiles",
+            "piece": "aptitude-tile",
+            "instanceIdTemplate": "aptitude:tile:{aptitudeId}"
+          }
+        }
+      },
+      "inspect": {
+        "piece": "aptitude-inspect",
+        "instanceId": "aptitudes:inspect",
+        "bind": "vm.inspect"
+      },
+      "decision": {
+        "piece": "allocate-decision-strip",
+        "instanceId": "aptitudes:decision",
+        "bind": "vm.decision"
+      }
+    }
+  }
+}

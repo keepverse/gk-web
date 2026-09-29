@@ -1,0 +1,20 @@
+{
+  "themeId": "wonder-scope.Sector",
+  "kind": "wonder-scope",
+  "id": "Sector",
+  "css": {
+    "--piece-accent": "var(--wonder-sector)",
+    "--piece-rail-edge": "var(--wonder-sector)",
+    "--piece-select-glow": "color-mix(in srgb, #8a7a5c 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#8a7a5c",
+    "accentMuted": "#5c5240",
+    "onAccent": "#14120c"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": "landmark"
+}

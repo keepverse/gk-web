@@ -1,0 +1,20 @@
+{
+  "themeId": "status-category.cc",
+  "kind": "status-category",
+  "id": "cc",
+  "css": {
+    "--piece-accent": "#6fa8d9",
+    "--piece-rail-edge": "#6fa8d9",
+    "--piece-select-glow": "color-mix(in srgb, #6fa8d9 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#6fa8d9",
+    "accentMuted": "#3d6688",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.status-cc-pulse",
+    "idle": null
+  },
+  "glyphDefault": "ban"
+}

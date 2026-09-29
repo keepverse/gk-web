@@ -1,0 +1,49 @@
+{
+  "surfaceId": "story-scene",
+  "host": "band-3-dialog",
+  "version": 1,
+  "notes": "Story scene inside DialogShell size:scene. Root binds vm; children bind relative fields. No lifecycle overlays - see spec-recipe-wire.md Audit correction G4. This file exists twice (design SSOT + runtime copy) and the two are byte-identical by convention.",
+  "root": {
+    "piece": "scene-stage",
+    "instanceId": "scene:stage",
+    "bind": "vm",
+    "slots": {
+      "actors": {
+        "$bindArray": "actors",
+        "piece": "actor-portrait",
+        "instanceIdTemplate": "scene:actor:{actorId}",
+        "slots": {
+          "body": {
+            "piece": "actor-sprite",
+            "bind": "body",
+            "notes": "PARENT-RELATIVE: resolves on the array item payload, which already carries the complete sprite fields (instanceId, identity, variant, url, phase, themeRef) — the fold assembles them, the recipe only names the piece."
+          }
+        }
+      },
+      "window": {
+        "piece": "dialogue-window",
+        "instanceId": "scene:window",
+        "bind": "window",
+        "slots": {
+          "nameTag": {
+            "piece": "name-tag",
+            "instanceId": "scene:name-tag",
+            "bind": "nameTag",
+            "notes": "PARENT-RELATIVE: resolves on the window payload (bindSurface.ts:123-127). Omit when the fold leaves window.nameTag undefined (narration beat)."
+          }
+        }
+      },
+      "progress": {
+        "piece": "scene-progress",
+        "instanceId": "scene:progress",
+        "bind": "progress",
+        "notes": "Omit mount when the fold leaves `progress` undefined (one-beat scene)"
+      },
+      "advance": {
+        "piece": "advance-control",
+        "instanceId": "scene:advance",
+        "bind": "advance"
+      }
+    }
+  }
+}

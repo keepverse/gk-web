@@ -1,0 +1,20 @@
+{
+  "themeId": "wonder-scope.Empire",
+  "kind": "wonder-scope",
+  "id": "Empire",
+  "css": {
+    "--piece-accent": "var(--wonder-empire)",
+    "--piece-rail-edge": "var(--wonder-empire)",
+    "--piece-select-glow": "color-mix(in srgb, #d8a93f 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#d8a93f",
+    "accentMuted": "#8a6a24",
+    "onAccent": "#14100a"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": "landmark"
+}

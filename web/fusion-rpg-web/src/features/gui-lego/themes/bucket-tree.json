@@ -1,0 +1,19 @@
+{
+  "themeId": "bucket.tree",
+  "kind": "bucket",
+  "id": "tree",
+  "css": {
+    "--piece-accent": "#7a9e5a",
+    "--piece-rail-edge": "#7a9e5a",
+    "--piece-select-glow": "color-mix(in srgb, #7a9e5a 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#7a9e5a",
+    "accentMuted": "#4a6238",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  }
+}

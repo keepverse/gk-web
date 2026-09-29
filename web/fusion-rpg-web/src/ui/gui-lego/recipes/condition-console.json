@@ -1,0 +1,90 @@
+{
+  "surfaceId": "condition-console",
+  "host": "actor-panel-tab",
+  "version": 2,
+  "notes": "2×2 CSS grid: prog|identity / hero|stand. Status nests under stand-row. Rail owns name/Lv/role only.",
+  "root": {
+    "piece": "surface-shell",
+    "instanceId": "shell:condition",
+    "bind": "vm",
+    "slots": {
+      "main": [
+        {
+          "piece": "progression-gauge",
+          "instanceId": "condition:progression",
+          "bind": "vm.main.0"
+        },
+        {
+          "piece": "actor-identity",
+          "instanceId": "condition:identity",
+          "bind": "vm.main.1",
+          "slots": {
+            "phase": {
+              "piece": "phase-badge",
+              "instanceId": "condition:identity:phase",
+              "bind": "phaseBadge",
+              "notes": "Omit mount when fold leaves phaseBadge undefined"
+            },
+            "elements": {
+              "$bindArray": "elementBadges",
+              "piece": "element-badge",
+              "instanceIdTemplate": "condition:identity:element:{elementId}"
+            }
+          }
+        },
+        {
+          "piece": "cond-hero",
+          "instanceId": "condition:hero",
+          "bind": "vm.main.2",
+          "slots": {
+            "radial": {
+              "piece": "pool-radial",
+              "instanceId": "condition:pool:hp",
+              "bind": "radial"
+            },
+            "meters": {
+              "$bindArray": "meters",
+              "piece": "pool-meter",
+              "instanceIdTemplate": "condition:resource:{poolId}"
+            },
+            "shield": {
+              "piece": "shield-status",
+              "instanceId": "condition:shield",
+              "bind": "shield",
+              "notes": "Omit mount when fold leaves shield undefined (Q3)"
+            }
+          }
+        },
+        {
+          "piece": "stand-row",
+          "instanceId": "condition:standing",
+          "bind": "vm.main.3",
+          "slots": {
+            "radar": {
+              "piece": "standing-radar",
+              "instanceId": "condition:standing:radar",
+              "bind": "radar"
+            },
+            "live": [
+              {
+                "piece": "standing-bars",
+                "instanceId": "condition:standing:bars",
+                "bind": "bars"
+              },
+              {
+                "piece": "status-glyph-strip",
+                "instanceId": "condition:status-strip",
+                "bind": "statusStrip"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "lifecycleOverlays": {
+    "loading": { "piece": "phase-loading", "bind": "vm.phasePayload" },
+    "error": { "piece": "phase-error", "bind": "vm.phasePayload" },
+    "pendingField": { "piece": "phase-pending", "bind": "field.phase" }
+  }
+}

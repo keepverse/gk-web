@@ -1,0 +1,20 @@
+{
+  "themeId": "resource.hunger",
+  "kind": "resource",
+  "id": "hunger",
+  "css": {
+    "--piece-accent": "#f39c12",
+    "--piece-rail-edge": "#f39c12",
+    "--piece-select-glow": "color-mix(in srgb, #f39c12 30%, transparent)"
+  },
+  "paint": {
+    "accent": "#f39c12",
+    "accentMuted": "#8a580a",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.resource-hunger-pulse",
+    "idle": null
+  },
+  "glyphDefault": "sun"
+}

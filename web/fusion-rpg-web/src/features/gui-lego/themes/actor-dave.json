@@ -1,0 +1,21 @@
+{
+  "themeId": "actor.dave",
+  "kind": "actor",
+  "id": "dave",
+  "css": {
+    "--piece-accent": "#d9a15c",
+    "--piece-rail-edge": "#d9a15c",
+    "--piece-nameplate": "#5c4222",
+    "--piece-select-glow": "color-mix(in srgb, #d9a15c 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#d9a15c",
+    "accentMuted": "#8f6a3a",
+    "onAccent": "#1b1208"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": null
+}

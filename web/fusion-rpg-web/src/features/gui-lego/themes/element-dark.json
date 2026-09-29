@@ -1,0 +1,20 @@
+{
+  "themeId": "element.dark",
+  "kind": "element",
+  "id": "dark",
+  "css": {
+    "--piece-accent": "var(--el-dark)",
+    "--piece-rail-edge": "var(--el-dark)",
+    "--piece-select-glow": "color-mix(in srgb, #8b7bab 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#8b7bab",
+    "accentMuted": "#564a6a",
+    "onAccent": "#1a1410"
+  },
+  "vfx": {
+    "select": "vfx.dark-pulse",
+    "idle": null
+  },
+  "glyphDefault": "moon"
+}

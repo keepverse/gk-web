@@ -1,0 +1,25 @@
+{
+  "identity": {
+    "tier": "elite",
+    "role": "vanilla",
+    "levelBand": 8,
+    "flags": []
+  },
+  "resources": {
+    "shield": {
+      "hp": 60,
+      "max": 100,
+      "stacks": [
+        { "element": "fire", "hp": 30, "max": 50 },
+        { "element": "ice", "hp": 30, "max": 50 }
+      ]
+    }
+  },
+  "statuses": [
+    { "id": "command", "cc": false, "magnitudeBand": "low" },
+    { "id": "expose", "cc": false, "magnitudeBand": "mid" },
+    { "id": "spark", "cc": false, "magnitudeBand": "low" },
+    { "id": "freeze", "cc": true, "magnitudeBand": "high" }
+  ],
+  "overflow": { "statusCount": 2 }
+}

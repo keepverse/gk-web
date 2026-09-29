@@ -1,0 +1,20 @@
+{
+  "themeId": "scene.rift-portal",
+  "kind": "scene",
+  "id": "rift-portal",
+  "css": {
+    "--piece-accent": "#c46bff",
+    "--scene-bed": "radial-gradient(circle at 50% 45%, rgba(145, 58, 220, 0.36), rgba(20, 12, 38, 0.94) 68%)",
+    "--scene-window": "#1a1030"
+  },
+  "paint": {
+    "accent": "#c46bff",
+    "accentMuted": "#7d43a8",
+    "onAccent": "#120821"
+  },
+  "vfx": {
+    "select": "vfx.rift-portal-surge",
+    "idle": null
+  },
+  "glyphDefault": null
+}

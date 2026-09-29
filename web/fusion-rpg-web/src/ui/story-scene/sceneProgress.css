@@ -1,0 +1,39 @@
+/**
+ * `scene-progress` — the scene's beat position.
+ *
+ * Scoped under `.story-scene-progress` (piece-contract §7: every rule under its own root class, never
+ * a global selector, never a stacking tier). Layout only; paint comes from the pack's custom
+ * properties, and token names are the real `--color-*` family.
+ *
+ * The current pip is marked by `data-current` and distinguished by **shape as well as colour**: a
+ * colour-only position fails for a colour-blind player, and the whole point of this piece is telling
+ * them where they are.
+ */
+
+.story-scene-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.story-scene-progress__pips {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.story-scene-progress__pip {
+  display: block;
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 9999px;
+  background: var(--color-border-control);
+}
+
+/* Elongation, not just hue: readable with any colour vision. */
+.story-scene-progress__pip[data-current="true"] {
+  width: 1.125rem;
+  background: var(--piece-accent, var(--color-lawn));
+}

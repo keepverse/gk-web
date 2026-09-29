@@ -1,0 +1,20 @@
+{
+  "themeId": "wonder-rarity.Unique",
+  "kind": "wonder-rarity",
+  "id": "Unique",
+  "css": {
+    "--piece-accent": "var(--wonder-unique)",
+    "--piece-rail-edge": "var(--wonder-unique)",
+    "--piece-select-glow": "color-mix(in srgb, #a87fd0 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#a87fd0",
+    "accentMuted": "#6a4f8a",
+    "onAccent": "#100c14"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": "landmark"
+}

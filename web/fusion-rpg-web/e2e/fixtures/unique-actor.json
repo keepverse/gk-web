@@ -1,0 +1,16 @@
+{
+  "instanceId": "fixture-actor-1",
+  "playerId": 1,
+  "empireId": "dave",
+  "side": "plant",
+  "typeId": 1,
+  "phase": "Roster",
+  "level": 1,
+  "xp": 0,
+  "matchKey": null,
+  "lastPtr": null,
+  "deployCorrelationId": null,
+  "revision": 0,
+  "createdAt": "2026-01-01T00:00:00.0000000Z",
+  "updatedAt": "2026-01-01T00:00:00.0000000Z"
+}

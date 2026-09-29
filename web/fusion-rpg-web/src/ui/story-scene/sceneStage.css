@@ -1,0 +1,108 @@
+/* Scene stage — the compose root.
+ *
+ * Full-bleed, never scrolling: the art bed scales down before the window or the control. Stacking
+ * is band utilities and document order — NO z-index, NO z-* class anywhere in this file (bandGuard
+ * enforces it on the real tree). No hex — paint arrives as custom properties from the scene pack.
+ *
+ * The 720px collapse and the reduced-motion rule live here as CSS because layout and motion belong
+ * to stylesheets; the file-content tests pin their presence since jsdom cannot evaluate media
+ * queries or measure layout.
+ */
+
+.story-scene-stage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.story-scene-stage__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--scene-bed);
+  pointer-events: none;
+}
+
+/*
+ * Paint-order trap (caught by the T23 visual gate, 2026-09-16): an ABSOLUTE element paints
+ * above every NON-positioned sibling regardless of DOM order (CSS step 6 vs steps 3-5), so the
+ * backdrop — first child by design — covered the window, progress and controls with the dark
+ * mood bed and dimmed them, while transformed portraits (also step 6, later in DOM) stayed
+ * crisp. DOM order is the stacking mechanism here ONLY if every layer participates in it:
+ * `position: relative` (z-auto, so NO z-index — the band ban stands) puts each content layer in
+ * step 6, where document order applies and the first-child backdrop stays at the bottom.
+ * Do NOT "simplify" this away, and do NOT fix it with z-index.
+ */
+.story-scene-stage__heading,
+.story-scene-stage__art,
+.story-scene-stage__actors,
+.story-scene-stage__window,
+.story-scene-stage__progress,
+.story-scene-stage__advance {
+  position: relative;
+}
+
+.story-scene-stage__heading {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.story-scene-stage__title {
+  font-weight: 700;
+}
+
+.story-scene-stage__subtitle {
+  opacity: 0.8;
+}
+
+.story-scene-stage__art {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* The bed yields first: the window and the advance control never shrink. An unreachable advance
+   control would trap the player in a scene, so this ordering is the S1 risk made explicit. */
+.story-scene-stage__window,
+.story-scene-stage__advance {
+  flex: none;
+}
+
+.story-scene-stage__progress {
+  flex: none;
+}
+
+.story-scene-stage__actors {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: center;
+  flex: none;
+}
+
+/* Narrow breakpoint: stack speaker-forward. The fold orders the array with the speaker first, so
+   the first child is nearest the window. Nobody is hidden — hiding a character is a continuity
+   change, not a layout change. */
+@media (max-width: 719px) {
+  .story-scene-stage__actors {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Reduced motion: beat transitions and sprite swaps become instant. This piece defines no
+   transitions or animations of its own, so there is nothing to animate — but a later scene pack or
+   child must not be able to introduce motion the OS asked to suppress. The media query below is the
+   real enforcement in browsers; the data-motion attribute (set from the same OS preference) is the
+   hook that makes the branch testable in jsdom, which cannot evaluate media queries. */
+@media (prefers-reduced-motion: reduce) {
+  .story-scene-stage__art,
+  .story-scene-stage__actors > * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

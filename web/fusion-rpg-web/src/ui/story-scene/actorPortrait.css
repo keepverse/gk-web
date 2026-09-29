@@ -1,0 +1,39 @@
+/* Actor portrait — one actor in a slot array.
+ *
+ * Speaking is structural, never color alone: size + lift + ring weight + opacity. The inactive
+ * actor settles (smaller, dimmer) but stays visible and identifiable. No hex here — paint arrives
+ * as custom properties from the actor's pack. No z-index tier of our own; the stage owns stacking.
+ */
+
+.story-actor-portrait {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  /* The posture hooks below do the work; the root carries only the pack variables. */
+}
+
+.story-actor-portrait__lift,
+.story-actor-portrait__settle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: solid;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+/* Speaking: full size, lifted, ringed. The 4px lift and the 3px-vs-1px ring read without color. */
+.story-actor-portrait__lift {
+  opacity: 1;
+  transform: scale(1) translateY(-4px);
+  border-width: 3px;
+  border-color: var(--piece-accent);
+}
+
+/* Inactive: smaller, settled, dimmed — still fully readable, never hidden. */
+.story-actor-portrait__settle {
+  opacity: 0.55;
+  transform: scale(0.94);
+  border-width: 1px;
+  border-color: var(--piece-accent);
+}

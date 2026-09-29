@@ -1,0 +1,202 @@
+.shield-console.console,
+.shield-console {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    "stack stack"
+    "inspect omni";
+  gap: 16px;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  color: var(--text);
+  align-items: stretch;
+}
+
+.shield-console > .shield-stack-bar,
+.shield-console [data-grid-area="stack"] {
+  grid-area: stack;
+}
+
+.shield-console > .shield-layer-inspect,
+.shield-console [data-grid-area="inspect"] {
+  grid-area: inspect;
+  min-height: 0;
+}
+
+.shield-console > .shield-omni-region,
+.shield-console [data-grid-area="omni"] {
+  grid-area: omni;
+  min-height: 0;
+  overflow: auto;
+}
+
+.shield-stack-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.shield-stack-bar .eyebrow,
+.shield-layer-inspect .eyebrow,
+.shield-omni-region .eyebrow {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.shield-stack-bar .track {
+  display: flex;
+  align-items: stretch;
+  gap: 3px;
+  min-height: 44px;
+  width: 100%;
+}
+
+.shield-segment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 48px;
+  border: 1px solid color-mix(in srgb, var(--piece-accent, var(--border-control)) 45%, var(--border-control));
+  border-radius: 8px;
+  background: var(--panel-inset);
+  overflow: hidden;
+  cursor: pointer;
+  color: var(--text);
+  text-align: left;
+  padding: 0;
+}
+
+.shield-segment.is-on {
+  outline: 2px solid var(--piece-accent, var(--sun));
+  outline-offset: 1px;
+}
+
+.shield-segment .fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: color-mix(in srgb, var(--piece-accent, var(--color-faint)) 38%, transparent);
+  pointer-events: none;
+}
+
+.shield-segment.is-untyped .fill {
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--muted) 28%, transparent),
+    color-mix(in srgb, var(--muted) 28%, transparent) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.shield-segment .meta {
+  /* position:relative is LOAD-BEARING, z-index is not (band GG-5): the .fill wash is absolute
+     (step 6), so a static .meta would paint underneath it. Relative (z-auto) puts .meta in
+     step 6 too, where DOM order (.meta after .fill) keeps the text on top — no tier needed.
+     Removing `relative` instead would dim the text under the wash. Verified 2026-09-16. */
+  position: relative;
+  padding: 6px 8px;
+  font-size: 11px;
+  line-height: 1.25;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.shield-segment .prio {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.shield-segment .hp {
+  font-family: var(--font-mono, ui-monospace);
+  font-weight: 700;
+}
+
+.shield-segment .regen {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.shield-empty-slot {
+  flex: 1 1 0;
+  min-width: 40px;
+  border: 1px dashed var(--border-control);
+  border-radius: 8px;
+  background: transparent;
+}
+
+.shield-layer-inspect {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--piece-accent, var(--border-control)) 40%, var(--border-control));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--piece-accent, transparent) 8%, var(--panel-inset));
+}
+
+.shield-layer-inspect.is-empty,
+.shield-layer-inspect.is-pending,
+.shield-layer-inspect.is-loading,
+.shield-layer-inspect.is-error {
+  border-style: dashed;
+  background: var(--panel-inset);
+}
+
+.shield-layer-inspect .title {
+  margin: 4px 0 0;
+  font-family: var(--font-display, inherit);
+  font-size: 16px;
+}
+
+.shield-layer-inspect .hp {
+  margin: 8px 0 0;
+  font-family: var(--font-mono, ui-monospace);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.shield-layer-inspect .meta {
+  margin: 8px 0 0;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.shield-layer-inspect .meta b {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.shield-omni-region {
+  padding: 12px 14px;
+  border: 1px solid var(--border-control);
+  border-radius: 12px;
+  background: var(--panel-inset);
+}
+
+.shield-omni-region .omni-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.shield-omni-region .row {
+  width: 100%;
+}
+
+.pending-copy {
+  margin: 0;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--muted);
+}

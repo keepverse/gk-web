@@ -1,0 +1,20 @@
+{
+  "themeId": "wonder-scope.Multiverse",
+  "kind": "wonder-scope",
+  "id": "Multiverse",
+  "css": {
+    "--piece-accent": "var(--wonder-not-yet)",
+    "--piece-rail-edge": "var(--wonder-not-yet)",
+    "--piece-select-glow": "color-mix(in srgb, #6a6a72 25%, transparent)"
+  },
+  "paint": {
+    "accent": "#6a6a72",
+    "accentMuted": "#45454c",
+    "onAccent": "#101014"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": "landmark"
+}

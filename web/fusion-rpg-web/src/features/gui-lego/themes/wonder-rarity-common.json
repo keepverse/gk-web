@@ -1,0 +1,20 @@
+{
+  "themeId": "wonder-rarity.Common",
+  "kind": "wonder-rarity",
+  "id": "Common",
+  "css": {
+    "--piece-accent": "var(--wonder-common)",
+    "--piece-rail-edge": "var(--wonder-common)",
+    "--piece-select-glow": "color-mix(in srgb, #9a9a8e 35%, transparent)"
+  },
+  "paint": {
+    "accent": "#9a9a8e",
+    "accentMuted": "#62625a",
+    "onAccent": "#101010"
+  },
+  "vfx": {
+    "select": null,
+    "idle": null
+  },
+  "glyphDefault": "landmark"
+}

@@ -1,0 +1,139 @@
+{
+  "surfaceId": "derived-console",
+  "host": "actor-panel-tab",
+  "version": 1,
+  "notes": "Design SSOT recipe. Mount inside ActorPanel Derived tab. No identity header — ActorPanel owns who/level. Tools live on the primary cook rail.",
+  "root": {
+    "piece": "surface-shell",
+    "instanceId": "shell:derived",
+    "bind": "vm",
+    "slots": {
+      "railPrimary": {
+        "piece": "rail-primary",
+        "instanceId": "rail:primary",
+        "bind": "vm.primaryRail",
+        "slots": {
+          "chips": {
+            "$bindArray": "vm.primaryRail.chips",
+            "piece": "chip",
+            "instanceIdTemplate": "chip:primary:{id}"
+          },
+          "tools": [
+            {
+              "piece": "tool-search",
+              "instanceId": "tool:search",
+              "bind": "vm.search"
+            },
+            {
+              "piece": "tool-toggle",
+              "instanceId": "tool:showUnchanged",
+              "bind": "vm.showUnchanged"
+            }
+          ]
+        }
+      },
+      "railVariant": {
+        "piece": "rail-variant",
+        "instanceId": "rail:variant",
+        "bind": "vm.variantRail",
+        "slots": {
+          "chips": {
+            "$bindArray": "vm.variantRail.chips",
+            "piece": "chip",
+            "instanceIdTemplate": "chip:variant:{id}"
+          }
+        }
+      },
+      "main": {
+        "piece": "split-inspect",
+        "instanceId": "split:derived",
+        "bind": "vm",
+        "slots": {
+          "dock": {
+            "piece": "scroll-region",
+            "instanceId": "scroll:dock",
+            "bind": "vm.dockScroll",
+            "slots": {
+              "content": {
+                "piece": "family-list",
+                "instanceId": "families:derived",
+                "bind": "vm.familyList",
+                "slots": {
+                  "blocks": {
+                    "$bindArray": "vm.families",
+                    "piece": "family-block",
+                    "instanceIdTemplate": "family:{familyId}",
+                    "slots": {
+                      "rows": {
+                        "$bindArray": "rows",
+                        "piece": "channel-row",
+                        "instanceIdTemplate": "row:{channelId}"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "inspect": {
+            "piece": "scroll-region",
+            "instanceId": "scroll:inspect",
+            "bind": "vm.inspectScroll",
+            "slots": {
+              "content": {
+                "piece": "inspect-pane",
+                "instanceId": "inspect:derived",
+                "bind": "vm.inspect",
+                "slots": {
+                  "hero": {
+                    "piece": "value-hero",
+                    "instanceId": "inspect:hero",
+                    "bind": "vm.inspect.hero"
+                  },
+                  "meta": {
+                    "piece": "meta-sentences",
+                    "instanceId": "inspect:meta",
+                    "bind": "vm.inspect.meta"
+                  },
+                  "cap": {
+                    "piece": "cap-note",
+                    "instanceId": "inspect:cap",
+                    "bind": "vm.inspect.cap"
+                  },
+                  "gauges": [
+                    {
+                      "piece": "gauge-donut",
+                      "instanceId": "inspect:donut",
+                      "bind": "vm.inspect.donut"
+                    },
+                    {
+                      "piece": "gauge-stack",
+                      "instanceId": "inspect:stack",
+                      "bind": "vm.inspect.stack"
+                    }
+                  ],
+                  "sources": {
+                    "piece": "source-list",
+                    "instanceId": "inspect:sources",
+                    "bind": "vm.inspect.sources"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "foot": {
+        "piece": "surface-foot",
+        "instanceId": "foot:derived",
+        "bind": "vm.foot"
+      }
+    }
+  },
+  "lifecycleOverlays": {
+    "loading": { "piece": "phase-loading", "bind": "vm.phasePayload" },
+    "empty": { "piece": "phase-empty", "bind": "vm.phasePayload" },
+    "error": { "piece": "phase-error", "bind": "vm.phasePayload" },
+    "pendingField": { "piece": "phase-pending", "bind": "field.phase" }
+  }
+}

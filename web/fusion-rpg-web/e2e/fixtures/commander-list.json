@@ -1,0 +1,15 @@
+{
+  "defaultLawnCommanderId": "commander:dave",
+  "commanders": [
+    {
+      "id": "commander:dave",
+      "displayName": "Garden Keeper",
+      "isDefault": true,
+      "activeAuraId": null,
+      "activeAuraName": null,
+      "locationStub": null,
+      "legionStub": null,
+      "equipment": null
+    }
+  ]
+}
