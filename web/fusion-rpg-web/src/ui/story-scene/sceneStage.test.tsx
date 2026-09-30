@@ -181,7 +181,7 @@ describe("scene-stage — tuning-read transition (gap G3)", () => {
   it("reads beatTransitionMs from the tuning file, never a literal", async () => {
     // The value is compared against the JSON source itself, so the test pins "read, not written"
     // without pinning 220 as a constant a rebalance would then have to update.
-    const tuning = await import("../../../../../data/tuning/story-scene-ui.v1.json");
+    const tuning = await import("@gk-core/data/tuning/story-scene-ui.v1.json");
     const expected = tuning.scene.beatTransitionMs;
     expect(typeof expected).toBe("number");
     const { container } = renderStage({});

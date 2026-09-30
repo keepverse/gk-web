@@ -1,4 +1,4 @@
-import namesEnJson from "../../../../data/seed/narrative/_registry/names.en.v1.json";
+import namesEnJson from "@gk-data/data/seed/narrative/_registry/names.en.v1.json";
 
 /**
  * The web reader for the lead names registry

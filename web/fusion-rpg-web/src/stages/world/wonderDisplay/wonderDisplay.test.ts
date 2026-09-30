@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import catalogJson from "../../../../../../data/seed/display/wonder-display.v1.json";
-import standingStonesSeed from "../../../../../../data/seed/structures/wonder/standing-stones.json";
-import sunspireThroneSeed from "../../../../../../data/seed/structures/wonder/sunspire-throne.json";
+import catalogJson from "@gk-data/data/seed/display/wonder-display.v1.json";
+import standingStonesSeed from "@gk-data/data/seed/structures/wonder/standing-stones.json";
+import sunspireThroneSeed from "@gk-data/data/seed/structures/wonder/sunspire-throne.json";
 import type { Magnitude, SectorView, SlotView } from "@/contract/types";
 import { absent, known, pendingWithReason } from "@/contract/pending";
 import {

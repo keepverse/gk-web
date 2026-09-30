@@ -2,7 +2,7 @@
  * Priority fiction labels for shield layers — aura / skill / innate.
  * Thresholds from gk-core/data/tuning/shield.v1.json drainPriority.
  */
-import shieldTuning from "../../../../../data/tuning/shield.v1.json";
+import shieldTuning from "@gk-core/data/tuning/shield.v1.json";
 
 const AURA = shieldTuning.drainPriority.aura;
 const SKILL = shieldTuning.drainPriority.skill;

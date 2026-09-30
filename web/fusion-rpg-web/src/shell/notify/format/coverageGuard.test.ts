@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import catalogJson from "../../../../../../data/tuning/notification-catalog.v3.json";
+import catalogJson from "@gk-core/data/tuning/notification-catalog.v3.json";
 import { translatorFor } from "./registry";
 import { renderNotification } from "./render";
 import "./translators"; // the one place every domain translator registers

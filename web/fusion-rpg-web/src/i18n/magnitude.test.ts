@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Magnitude, UnitClass } from "@/contract/types";
-import statsTuning from "../../../../data/tuning/stats.v1.json";
+import statsTuning from "@gk-core/data/tuning/stats.v1.json";
 import {
   CombatProbabilityScale,
   formatMagnitude,

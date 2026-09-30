@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { APTITUDE_IDS, applyAutoAssignShares, ruleLabel, type AutoAssignRule } from "./autoAssign";
-import autoAssignCatalogJson from "../../../../../data/tuning/aptitude-auto-assign-catalog.v1.json";
+import autoAssignCatalogJson from "@gk-core/data/tuning/aptitude-auto-assign-catalog.v1.json";
 
 // spec-assign-ladder.md (EP1.5, W1) -- the fill-logic tests that used to live here (even/posture/
 // species-favour scaling, Mode C refusal) moved with the mirror they tested: the ladder is now the

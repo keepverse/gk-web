@@ -1,7 +1,7 @@
 // notify-vocabulary spec §3, §4 - a category id is an open string. Promotion is read from ONE
 // block. The server never routes by channel (that is a web-only setting), so NotifyChannel lives
 // here, not in the wire DTOs.
-import catalogJson from "../../../../../data/tuning/notification-catalog.v3.json";
+import catalogJson from "@gk-core/data/tuning/notification-catalog.v3.json";
 
 export type NotifyCategoryId = string;
 export type NotifyChannel = "toast" | "rail" | "off";

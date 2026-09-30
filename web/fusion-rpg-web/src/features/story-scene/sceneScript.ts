@@ -1,4 +1,4 @@
-import tuning from "../../../../../data/tuning/story-scene-ui.v1.json";
+import tuning from "@gk-core/data/tuning/story-scene-ui.v1.json";
 
 /**
  * The story-scene script contract and the Rift prologue's data.

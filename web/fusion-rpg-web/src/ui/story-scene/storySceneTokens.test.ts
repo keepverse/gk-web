@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import tuning from "../../../../../data/tuning/story-scene-ui.v1.json";
+import tuning from "@gk-core/data/tuning/story-scene-ui.v1.json";
 import {
   STORY_SCENE_ACTOR_COLLAPSE_PX,
   STORY_SCENE_ART_ASPECT,

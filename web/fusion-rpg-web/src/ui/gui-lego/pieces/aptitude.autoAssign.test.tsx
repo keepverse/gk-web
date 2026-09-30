@@ -19,7 +19,7 @@ import { RecipeMount } from "@/ui/gui-lego/RecipeMount";
 import { ensureAptitudesGuiLegoRegistered } from "@/ui/gui-lego/registerAptitudes";
 import aptitudesRecipe from "@/ui/gui-lego/recipes/aptitudes-console.json";
 import type { RecipeDocument } from "@/features/gui-lego/types";
-import autoAssignCatalogJson from "../../../../../../data/tuning/aptitude-auto-assign-catalog.v1.json";
+import autoAssignCatalogJson from "@gk-core/data/tuning/aptitude-auto-assign-catalog.v1.json";
 
 /** What the server answers for a unique/species scope: the whole closed six. */
 const SERVER_UNIQUE_RULES = [

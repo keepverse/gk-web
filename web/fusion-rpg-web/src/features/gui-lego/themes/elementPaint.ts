@@ -2,7 +2,7 @@
  * Element paint SSOT — theme packs + element catalog resolve.
  * Spec: docs/architecture/gui-lego/spec-element-paint-ssot.md
  */
-import elementCatalogJson from "../../../../../../data/tuning/element-catalog.v1.json";
+import elementCatalogJson from "@gk-core/data/tuning/element-catalog.v1.json";
 import { lookupThemePack, resolveTheme } from "../themeRegistry";
 import type { GlyphRef, ThemeResolved } from "../types";
 

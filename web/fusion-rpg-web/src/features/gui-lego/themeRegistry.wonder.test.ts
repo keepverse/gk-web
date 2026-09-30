@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import scopeSectorDesign from "../../../../../docs/design/gui-lego/themes/packs/wonder-scope-sector.json";
-import scopeEmpireDesign from "../../../../../docs/design/gui-lego/themes/packs/wonder-scope-empire.json";
-import scopeWorldDesign from "../../../../../docs/design/gui-lego/themes/packs/wonder-scope-world.json";
-import scopeMultiverseDesign from "../../../../../docs/design/gui-lego/themes/packs/wonder-scope-multiverse.json";
-import rarityCommonDesign from "../../../../../docs/design/gui-lego/themes/packs/wonder-rarity-common.json";
-import rarityUniqueDesign from "../../../../../docs/design/gui-lego/themes/packs/wonder-rarity-unique.json";
+import scopeSectorDesign from "@gk-workflow/docs/design/gui-lego/themes/packs/wonder-scope-sector.json";
+import scopeEmpireDesign from "@gk-workflow/docs/design/gui-lego/themes/packs/wonder-scope-empire.json";
+import scopeWorldDesign from "@gk-workflow/docs/design/gui-lego/themes/packs/wonder-scope-world.json";
+import scopeMultiverseDesign from "@gk-workflow/docs/design/gui-lego/themes/packs/wonder-scope-multiverse.json";
+import rarityCommonDesign from "@gk-workflow/docs/design/gui-lego/themes/packs/wonder-rarity-common.json";
+import rarityUniqueDesign from "@gk-workflow/docs/design/gui-lego/themes/packs/wonder-rarity-unique.json";
 import { listThemePacks, lookupThemePack, resolveTheme } from "./themeRegistry";
 
 const SCOPE_IDS = ["Sector", "Empire", "World", "Multiverse"] as const;

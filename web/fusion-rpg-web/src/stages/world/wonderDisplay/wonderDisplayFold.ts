@@ -1,4 +1,4 @@
-import catalogJson from "../../../../../../data/seed/display/wonder-display.v1.json";
+import catalogJson from "@gk-data/data/seed/display/wonder-display.v1.json";
 import type { SectorView, SlotView } from "@/contract/types";
 import type { ThemeRef } from "@/features/gui-lego/types";
 import { formatMagnitude } from "@/i18n/magnitude";

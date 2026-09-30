@@ -4,7 +4,7 @@
  * keeps only what the host still needs on the FE side: the closed rule/result types, the aptitude
  * id roster, and the pure "apply a shares map into the draft" helper — never a second fill.
  */
-import autoAssignCatalogJson from "../../../../../data/tuning/aptitude-auto-assign-catalog.v1.json";
+import autoAssignCatalogJson from "@gk-core/data/tuning/aptitude-auto-assign-catalog.v1.json";
 
 export type AutoAssignRule =
   | "even"

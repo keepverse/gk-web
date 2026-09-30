@@ -5,6 +5,7 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { lingui } from "@lingui/vite-plugin";
+import { coreRoot, dataRoot, workflowRoot } from "./gkRoots.mjs";
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -16,14 +17,28 @@ export default defineConfig({
   ],
   base: "./",
   resolve: {
+    // @gk-core / @gk-data / @gk-workflow resolve through gkRoots, which walks up to the
+    // workspace and honours KEEPVERSE_*_ROOT. They replace relative specifiers such as
+    // `../../../../../data/tuning/x.json`, which named the monorepo root and, after the
+    // split, pointed inside gk-web at a file that does not exist. tsconfig.json carries the
+    // same three names so `tsc --noEmit` resolves what vite resolves.
     alias: {
-      "@": path.resolve(rootDir, "src")
+      "@": path.resolve(rootDir, "src"),
+      "@gk-core": coreRoot(),
+      "@gk-data": dataRoot(),
+      "@gk-workflow": workflowRoot()
     }
   },
   server: { host: "127.0.0.1", port: 5173 },
   preview: { host: "127.0.0.1", port: 4173 },
   build: {
-    outDir: "../../src/FusionRpg.Server/wwwroot",
+    // The server serves the web with UseStaticFiles() from its own publish directory, so the
+    // build output belongs to the SERVER's wwwroot - in gk-core. This string used to be
+    // "@gk-core/src/FusionRpg.Server/wwwroot", correct while the web sat beside the server and
+    // wrong the moment the package moved to gk-web: it resolved to gk-web/src/..., a directory
+    // that does not exist, so a successful build would have delivered the web to a repository
+    // the server never reads. gk-core gitignores **/wwwroot/, so the output is not committed.
+    outDir: path.join(coreRoot(), "src", "FusionRpg.Server", "wwwroot"),
     emptyOutDir: true
   },
   test: {

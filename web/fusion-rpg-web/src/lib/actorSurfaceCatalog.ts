@@ -11,12 +11,12 @@
  * keeps importing from the same place; this module is the *source*, not a second API.
  */
 
-import aptitudeCatalogJson from "../../../../data/tuning/aptitude-catalog.v1.json";
-import derivedCatalogJson from "../../../../data/tuning/derived-stat-catalog.v2.json";
-import elementCatalogJson from "../../../../data/tuning/element-catalog.v2.json";
-import resourceCatalogJson from "../../../../data/tuning/resource-catalog.v1.json";
-import statusCatalogJson from "../../../../data/tuning/status-catalog.v1.json";
-import actorSheetJson from "../../../../data/tuning/actor-sheet.v1.json";
+import aptitudeCatalogJson from "@gk-core/data/tuning/aptitude-catalog.v1.json";
+import derivedCatalogJson from "@gk-core/data/tuning/derived-stat-catalog.v2.json";
+import elementCatalogJson from "@gk-core/data/tuning/element-catalog.v2.json";
+import resourceCatalogJson from "@gk-core/data/tuning/resource-catalog.v1.json";
+import statusCatalogJson from "@gk-core/data/tuning/status-catalog.v1.json";
+import actorSheetJson from "@gk-core/data/tuning/actor-sheet.v1.json";
 
 export type ActorSheetTabKind =
   | "condition"

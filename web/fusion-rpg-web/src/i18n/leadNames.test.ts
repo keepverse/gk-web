@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import namesEnJson from "../../../../data/seed/narrative/_registry/names.en.v1.json";
+import namesEnJson from "@gk-data/data/seed/narrative/_registry/names.en.v1.json";
 import {
   LEAD_TOKENS,
   leadName,

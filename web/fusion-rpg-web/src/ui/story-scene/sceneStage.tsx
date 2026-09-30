@@ -4,7 +4,7 @@ import { themeStyle, vfxClass } from "@/ui/gui-lego/RecipeMount";
 import { prefersReducedMotion } from "@/features/story-scene/storyCue";
 import type { StoryCueId } from "@/features/story-scene/sceneScript";
 import { ADVANCE_EVENTS } from "./advanceControl";
-import storySceneUi from "../../../../../data/tuning/story-scene-ui.v1.json";
+import storySceneUi from "@gk-core/data/tuning/story-scene-ui.v1.json";
 import "./sceneStage.css";
 
 /**

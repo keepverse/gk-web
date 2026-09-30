@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import tuning from "../../../../../data/tuning/story-scene-ui.v1.json";
+import tuning from "@gk-core/data/tuning/story-scene-ui.v1.json";
 import { registryFor } from "@/i18n/leadNames";
 import { RIFT_PROLOGUE_SCRIPT, assertSceneScript, maxBeatsPerScene } from "./sceneScript";
 

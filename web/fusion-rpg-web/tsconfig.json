@@ -18,7 +18,10 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@gk-core/*": ["../../../gk-core/*"],
+      "@gk-data/*": ["../../../gk-data/packs/fusion/*"],
+      "@gk-workflow/*": ["../../../gk-workflow/*"]
     }
   },
   "include": ["src"],
