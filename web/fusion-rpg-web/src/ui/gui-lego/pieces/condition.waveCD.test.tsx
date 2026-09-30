@@ -2,6 +2,7 @@ import { describe, expect, it, beforeEach, afterEach } from "vitest";
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { workflowDoc } from "@/test/workspaceRoot";
 import { render, screen, waitFor } from "@testing-library/react";
 import { bindSurface } from "@/features/gui-lego/bindSurface";
 import { createConditionSurfaceBus } from "@/features/gui-lego/conditionSurfaceBus";
@@ -19,9 +20,8 @@ import { asSurfaceBusLike } from "@/features/gui-lego/createSurfaceBus";
 import feRecipe from "@/ui/gui-lego/recipes/condition-console.json";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const repoRoot = resolve(here, "../../../../../../");
 const designRecipe = JSON.parse(
-  readFileSync(resolve(repoRoot, "docs/design/gui-lego/recipes/condition-console.json"), "utf8")
+  readFileSync(workflowDoc("docs", "design", "gui-lego", "recipes", "condition-console.json"), "utf8")
 );
 const conditionConsoleCss = readFileSync(resolve(here, "../conditionConsole.css"), "utf8");
 function actor(): ActorView {

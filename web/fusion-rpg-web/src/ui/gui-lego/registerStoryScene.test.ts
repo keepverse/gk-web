@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { workflowDoc } from "@/test/workspaceRoot";
 import storySceneRecipe from "@/ui/gui-lego/recipes/story-scene.json";
 import { ensureStorySceneRegistered } from "@/ui/gui-lego/registerStoryScene";
 import { getRecipe } from "@/features/gui-lego/recipeRegistry";
@@ -27,7 +28,7 @@ describe("recipe-wire — design SSOT and runtime copy agree", () => {
     // no precedent for it), and a bundler-resolved import would prove less than a byte read.
     const design = JSON.parse(
       readFileSync(
-        join(__dirname, "..", "..", "..", "..", "..", "docs", "design", "gui-lego", "recipes", "story-scene.json"),
+        workflowDoc("docs", "design", "gui-lego", "recipes", "story-scene.json"),
         "utf8"
       )
     );

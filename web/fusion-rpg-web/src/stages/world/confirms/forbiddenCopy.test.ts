@@ -1,21 +1,13 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { coreFile } from "@/test/workspaceRoot";
 
-const WORLD_COMMAND_PATH = join(
-  __dirname,
-  "..",
-  "..",
-  "..",
-  "..",
-  "..",
-  "..",
-  "src",
-  "FusionRpg.Core",
-  "World",
-  "Turn",
-  "WorldCommand.cs"
-);
+// Six ".." hops up from src/stages/world/confirms/ used to land on the monorepo root, which is
+// where WorldCommand.cs lived. The package moved to gk-web and the hop count did not, so this
+// resolved to gk-web/src/FusionRpg.Core/... and the test died on ENOENT for a file whose
+// existence was never in question. The repository that owns the file is now named instead.
+const WORLD_COMMAND_PATH = coreFile("src", "FusionRpg.Core", "World", "Turn", "WorldCommand.cs");
 
 const FORBIDDEN_PATTERNS: RegExp[] = [
   /choose what to release/i,

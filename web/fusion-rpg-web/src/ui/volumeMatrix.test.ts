@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { webRoot } from "@/test/workspaceRoot";
 
 /**
  * GG-50: "A surface that lists entities states its strategy at each order of magnitude." This is
@@ -208,12 +209,15 @@ describe("volume matrix (GG-50)", () => {
     // exactly why this assertion reads real `git` state rather than a hardcoded snapshot: it goes
     // green the moment that work is committed, and it will not silently forgive anything landing
     // here later that was not.
-    const repoRoot = join(__dirname, "..", "..", "..", "..");
-    const protectedPaths = [
-      "web/fusion-rpg-web/src/stages/world",
-      "web/fusion-rpg-web/src/features/world",
-      "web/fusion-rpg-web/src/lib/bus/world.ts"
-    ];
+    // The repository that OWNS these paths is gk-web. Four hops up from src/ui/ reached the
+    // monorepo root; after the package moved to gk-web it reached gk-web's PARENT, so
+    // `git status -- web/fusion-rpg-web/...` ran in the wrong repository against paths that do not
+    // exist there. `git status -- <path>` over a pathspec matching nothing prints nothing and exits
+    // 0, so the assertion passed for the wrong reason: it was green because it was looking at a
+    // repository where the files it protects are not present. A guard that cannot see what it
+    // guards is not a guard, which is the same failure as a scan that silently narrows.
+    const repoRoot = webRoot();
+    const protectedPaths = ["src/stages/world", "src/features/world", "src/lib/bus/world.ts"];
     const output = execSync(`git status --porcelain -- ${protectedPaths.join(" ")}`, {
       cwd: repoRoot,
       encoding: "utf8"

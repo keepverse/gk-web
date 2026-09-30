@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join } from "node:path";
+import { coreFile } from "@/test/workspaceRoot";
 import { createElement } from "react";
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
@@ -21,7 +22,7 @@ import { maximalSector } from "./inspector/fixtures/maximalSector";
  * never actually run against a real repo state, but it stays in place as the guard against a future
  * regression (someone reverting W24, or forking a command list that drops `cede`).
  */
-const WORLD_COMMAND_CS = join(__dirname, "..", "..", "..", "..", "..", "src", "FusionRpg.Core", "World", "Turn", "WorldCommand.cs");
+const WORLD_COMMAND_CS = coreFile("src", "FusionRpg.Core", "World", "Turn", "WorldCommand.cs");
 
 function cedeInRealVocabulary(): boolean {
   const text = readFileSync(WORLD_COMMAND_CS, "utf8");

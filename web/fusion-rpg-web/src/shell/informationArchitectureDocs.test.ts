@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { workflowDoc } from "@/test/workspaceRoot";
 import { describe, expect, it } from "vitest";
 import { STAGE_IDS } from "./railState";
 
@@ -13,8 +14,9 @@ import { STAGE_IDS } from "./railState";
  * reads a sibling source file to assert an invariant about it.
  */
 function readDoc(relativePath: string): string {
-  const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "../../../..");
-  return readFileSync(join(repoRoot, relativePath), "utf8");
+  // The hop count was "../../../.." from src/shell/, which reached the monorepo root and now
+  // reaches gk-web's parent instead. The doc it reads is gk-workflow's, so it is named as such.
+  return readFileSync(workflowDoc(...relativePath.split("/")), "utf8");
 }
 
 describe("information-architecture.md names siege as a real, landed stage", () => {
