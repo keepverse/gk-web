@@ -13,7 +13,16 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
-const repoRoot = path.resolve(scriptDir, "..", "..", "..");
+// The design kit is gk-workflow's - docs/design/** is developer documentation, which the
+// workspace ownership rule gives to gk-workflow, and the split moved the whole docs/ tree
+// there. Three ".." hops from scripts/ reached the monorepo root before the split; after the
+// package moved to gk-web they reach gk-web, where docs/design/_kit/tokens.css does not exist,
+// so the generator failed with ENOENT on its own source file. The root is named through the
+// shared resolver for the same reason the aliases are: a hop count is a statement about where
+// this file used to live.
+import { workflowRoot } from "../gkRoots.mjs";
+
+const repoRoot = workflowRoot();
 export const KIT_PATH = path.join(repoRoot, "docs", "design", "_kit", "tokens.css");
 export const OUTPUT_PATH = path.join(scriptDir, "..", "src", "theme", "tokens.css");
 
