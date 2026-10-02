@@ -186,7 +186,13 @@ describe("ActorPanel (catalog-era)", () => {
     expect(screen.getByTestId("kit-tab")).toBeInTheDocument();
     expect(screen.queryByText("Strike")).not.toBeInTheDocument();
     expect(screen.queryByText("Firebolt")).not.toBeInTheDocument();
-    expect(screen.queryByTestId("actions-tab")).not.toBeInTheDocument();
+    // 9aad045cf (2026-09-07) unmounted ActionsTab from this tab and pinned that absence here, behind
+    // the placeholder "Action slots unlock when the action corpus ships". That condition is met and
+    // the surface now mounts, so this assertion follows it. The test's real intent - no fabricated
+    // placeholder actions - is unchanged and still enforced by the two assertions above: with
+    // nothing held, the grid renders the honest empty state instead of inventing a loadout.
+    expect(screen.getByTestId("actions-tab")).toBeInTheDocument();
+    expect(screen.getByTestId("actions-tab-actions-empty")).toBeInTheDocument();
   });
 
   it("leftover footer is absent on Condition and present (pending or ready) on Aptitudes", async () => {

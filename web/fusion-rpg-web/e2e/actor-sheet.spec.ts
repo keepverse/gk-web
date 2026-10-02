@@ -128,7 +128,12 @@ test.describe("ActorSheet catalog-era shell", () => {
     await expect(page.getByTestId("kit-tab")).toBeVisible();
     await expect(page.getByTestId("kit-equip-pending")).toBeVisible();
     await expect(page.getByTestId("kit-tab")).not.toContainText(/Strike|Firebolt/i);
-    await expect(page.locator('[data-testid="actions-tab"]')).toHaveCount(0);
+    // 9aad045cf (2026-09-07) unmounted the aura/action surface from the Kit tab and pinned its
+    // absence here, behind the placeholder "Action slots unlock when the action corpus ships". That
+    // condition is met and the surface mounts again, so the count moves 0 -> 1. The anti-fabrication
+    // assertion above is deliberately left untouched: the Kit tab must still never invent
+    // placeholder actions, and a real surface with nothing held says so honestly.
+    await expect(page.locator('[data-testid="actions-tab"]')).toHaveCount(1);
 
     await page.getByTestId("actor-sheet-tab-condition").click();
     await expect(page.getByTestId("actor-panel-deploy")).toBeVisible();
