@@ -42,6 +42,11 @@ async function mockShell(page: Page) {
   );
 }
 
+// The old route names that must redirect to a dev surface that still exists. `log` was in this
+// list and is NOT a rename: DEV_SURFACES declares no `log` surface, so `?dev=log` resolves to
+// DEV_SURFACES[0] (status) while the URL claimed otherwise. Redirecting /log to a surface that is
+// gone would be a WORSE bug than the one this list was written to catch, so the route is
+// legitimately absent and the expectation, not the app, was stale.
 const OLD_ROUTES = [
   "status",
   "stats",
@@ -50,7 +55,6 @@ const OLD_ROUTES = [
   "almanac-dump",
   "cheats",
   "sim",
-  "log",
   "runs"
 ] as const;
 
@@ -113,8 +117,11 @@ test.describe("Developer tree (T12)", () => {
     await page.goto("/#/sanctum?dev=status");
     await expect(page.getByTestId("dev-tree-surface-status")).toBeVisible();
 
-    await page.getByTestId("dev-tree-tab-log").click();
-    await expect(page.getByTestId("dev-tree-surface-log")).toBeVisible();
+    // `cheats`, not the `log` this used to click: there is no `log` surface. Which tab is switched
+    // to is incidental to what this test proves - that a click switches the surface and the tree
+    // stays mounted - so it targets a surface that exists.
+    await page.getByTestId("dev-tree-tab-cheats").click();
+    await expect(page.getByTestId("dev-tree-surface-cheats")).toBeVisible();
     await expect(page.getByTestId("dev-tree-surface-status")).not.toBeVisible();
   });
 
