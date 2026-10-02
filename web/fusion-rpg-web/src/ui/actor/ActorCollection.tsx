@@ -140,6 +140,10 @@ export function ActorCollection({
           value={query.side}
           onChange={(e) => setQuery({ ...query, side: e.target.value as ActorCollectionQuery["side"] })}
           data-testid={`${testId}-side`}
+          // axe `select-name` (critical): a bare <select> has no implicit name, and this one had no
+          // label element either, so it was announced as an unnamed combo box. The adjacent TextInput
+          // survives on its placeholder because `textbox` accepts one; a select does not.
+          aria-label="Filter by side"
           className="rounded-md border border-border bg-panel px-2 py-1 text-sm"
         >
           <option value="all">All</option>
