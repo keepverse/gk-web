@@ -111,11 +111,17 @@ test.describe("Volume fixtures (GG-50 — CreaturesLayer)", () => {
     await expect(page.getByTestId("creatures-layer")).toBeVisible();
 
     await expect(page.getByTestId("creatures-search-first")).toBeVisible();
-    // LEFT RED DELIBERATELY: the prompt reads "Too many to list - search or filter to narrow
-    // the roster." and carries no count. Making this pass means either weakening the
-    // assertion or changing user-visible copy; the first is forbidden and the second is a
-    // product decision, so it is reported rather than resolved here.
-    await expect(page.getByTestId("creatures-search-first")).toContainText("241 creatures");
+    // The prompt's shipped copy, not a roster count. This previously asserted the text contains
+    // "241 creatures" and was left red on purpose, on the reasoning that satisfying it meant either
+    // weakening the assertion or changing user-visible copy. The owner's ruling (2026-10-03) is to keep
+    // the copy count-free and correct the test — and count-free is right for a reason the original
+    // note missed: pinning a POPULATION COUNT is the one thing
+    // docs/architecture/validation-ssot.md forbids as a guardrail, because it fails the moment a
+    // species legitimately ships, and for a live corpus that is the normal case rather than the
+    // exception. Asserting the shipped copy states this test's own contract — its header says "a
+    // search or filter is the entry point, not an optional refinement" — while the assertions below
+    // keep it non-vacuous: the grid stays unmounted and invisible until a filter narrows it.
+    await expect(page.getByTestId("creatures-search-first")).toContainText("search or filter");
     await expect(page.getByTestId("creatures-list")).not.toBeVisible();
     expect(await page.locator('[data-testid^="creatures-item-"]').count()).toBe(0);
 
