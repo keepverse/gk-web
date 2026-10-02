@@ -161,7 +161,14 @@ test.describe("System layer — plate parity (T29)", () => {
     await page.goto("/#/sanctum?system=1");
 
     await expect(page.getByTestId("system-tab-sound")).toBeDisabled();
-    await expect(page.getByTestId("system-tab-sound")).toHaveAttribute("title", /audio pipeline/);
+    // The criterion this test is named for is "states its reason", and the reason is stated — the
+    // old `/audio pipeline/` regex pinned wording the product does not use. Pin the copy the product
+    // actually ships, which is the same string `SystemLayer.test.tsx:217` already asserts, so the
+    // two suites cannot drift apart on it. Still a real assertion: an empty or missing title fails.
+    await expect(page.getByTestId("system-tab-sound")).toHaveAttribute(
+      "title",
+      "Sound settings aren't available yet."
+    );
 
     for (const tab of ["display", "advanced", "controls", "preferences"]) {
       await page.getByTestId(`system-tab-${tab}`).click();

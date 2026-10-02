@@ -48,7 +48,11 @@ test.describe("Title screen (plate 01 §A)", () => {
     await mockShell(page, ONE_PLAYER);
     await page.goto("/");
     await expect(page.getByTestId("title-screen")).toBeVisible();
-    await expect(page.getByText("Rise of Summoner")).toBeVisible();
+    // The player-facing name, per identity-rename T18 (owner rulings R9/R11/R12, IC-1b). This used to
+    // assert "Rise of Summoner", which is in `src/i18n/vocabularyGuard.ts:73` as a RETIRED
+    // player-facing name — so the assertion was not merely stale, it demanded that player copy name
+    // the thing the vocabulary guard exists to keep out of it.
+    await expect(page.getByText("Garden Keeper and his Multiverse")).toBeVisible();
     await expect(page.getByTestId("sanctum-hud")).toHaveCount(0);
   });
 

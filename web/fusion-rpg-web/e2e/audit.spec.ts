@@ -263,9 +263,13 @@ test.describe("audit shell e2e", () => {
     await page.keyboard.press("Escape");
     await expect(page.getByTestId("almanac-layer")).not.toBeVisible();
 
-    await page.goto("./#/log");
-    await expect(page.getByRole("heading", { name: "Live log" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Pause" })).toBeVisible();
+    // "Live log" goes with the surface. The dev tree's `log` entry pointed at
+    // `@/features/log/LogPage`, which was never built — no such module exists anywhere in the tree —
+    // so it was a scaffolded tab pointing at nothing and was removed
+    // (`src/dev/DeveloperTree.tsx:41`). Asserting it would assert a screen the product deliberately
+    // deleted. This goto is not just dropped, it is redirected: it is also what re-opens the tree
+    // for the Runs assertions below, so #/runs stands in and they still run.
+    await page.goto("./#/runs");
 
     await page.getByTestId("dev-tree-tab-runs").click();
     const runsSurface = page.getByTestId("dev-tree-surface-runs");

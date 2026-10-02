@@ -149,11 +149,16 @@ test.describe("Aura surface (aura-skill T18c)", () => {
     await page.getByTestId("actor-ladder-open-panel").click();
     await page.getByTestId("actor-sheet-tab-derived").click();
 
-    await page.getByRole("tab", { name: "progression" }).click();
-    await page.getByTestId("derived-family-progression.power").click();
-    const powerChannel = page.getByTestId("derived-channel-progression.power");
-    await expect(powerChannel).toBeVisible();
-    await expect(powerChannel.getByTestId("channel-contribution-rpg.progression")).toBeVisible();
+    // The family tab list and the `derived-family-*` rows this used to drive are gone. The derived tab
+    // is now a server-driven gui-lego recipe: a channel is a <button> carrying
+    // `data-testid="derived-channel-<channelId>"` that emits `derived.channel.select`
+    // (`src/ui/gui-lego/pieces/domain.tsx:135-138`), and selecting it is what reveals the
+    // contributions. `derived-family-*` is emitted nowhere in src, and `getByRole("tab", …)` on this
+    // surface can only ever match the sheet's own top-level rail.
+    await page.getByTestId("derived-channel-progression.power").click();
+    await expect(page.getByTestId("derived-channel-progression.power")).toBeVisible();
+    // GG-49 InspectSplit, non-vacuously: the contribution row is the server's own recorded source.
+    await expect(page.getByTestId("channel-contribution-rpg.progression")).toBeVisible();
   });
 
   const VIEWPORTS = [

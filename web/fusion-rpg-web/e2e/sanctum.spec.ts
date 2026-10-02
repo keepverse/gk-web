@@ -61,27 +61,31 @@ test.describe("Sanctum stage (T9)", () => {
     await expect(page.getByTestId("focus-card-cta")).toBeVisible();
   });
 
-  // Legacy fe-essentials T1 compatibility check. The sunflower/bind branch is retained only until
-  // the server-backed first-session progression sequence replaces it; it is not current onboarding.
-  test("legacy empty-roster reveal remains internally consistent until replacement", async ({ page }) => {
+  // The first-run card the player actually sees. This used to assert the legacy sunflower/bind reveal
+  // (`FirstRunReveal.tsx`), and the branch it covered has been replaced exactly as this test's own
+  // header predicted: `FirstRunReveal` is no longer imported or rendered anywhere in the app — only by
+  // its own unit file `FirstRunReveal.test.tsx` ("legacy compatibility") — and its
+  // `focus-card-first-run` testid is now claimed by `FocusCard.tsx:67`, the live empty-roster card. So
+  // the old copy and the "first-run reveal: bind clicked" console line (logged only at
+  // `FirstRunReveal.tsx:15`) could never appear in a real run. Asserting that legacy copy is now
+  // ABSENT is the assertion that matters: it is what proves the replacement happened rather than both
+  // cards coexisting.
+  test("the first-run card is the live one, and the legacy bind reveal is gone", async ({ page }) => {
     await mockSanctum(page);
     await page.goto("/#/sanctum");
 
     await expect(page.getByTestId("focus-card-first-run")).toBeVisible();
-    await expect(page.getByText("This one answered")).toBeVisible();
-    await expect(page.getByText(/A sunflower has bound itself to you/)).toBeVisible();
+    await expect(page.getByText("First lawn run")).toBeVisible();
+    await expect(page.getByTestId("focus-card-cta")).toHaveText("View creatures");
+
+    await expect(page.getByText("This one answered")).toHaveCount(0);
+    await expect(page.getByText(/A sunflower has bound itself to you/)).toHaveCount(0);
     await expect(page.getByText("Bind your first creature")).toHaveCount(0);
     await expect(page.getByText("Open Creatures")).toHaveCount(0);
-
-    const consoleLogs: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "debug") consoleLogs.push(msg.text());
-    });
 
     await page.getByTestId("focus-card-cta").click();
     await expect(page.getByTestId("creatures-layer")).toBeVisible();
     await expect(page).toHaveURL(/panel=creatures/);
-    await expect.poll(() => consoleLogs.some((l) => l.includes("first-run reveal: bind clicked"))).toBe(true);
   });
 
   test("the rail's Sanctum entry is active and locked entries say what unlocks them", async ({ page }) => {
@@ -161,7 +165,12 @@ test.describe("Sanctum home (T26)", () => {
     await expect(page.getByTestId("focus-card-run-prompt")).toBeVisible();
     await expect(page.getByTestId("sanctum-home")).toBeVisible();
     await expect(page.getByTestId("sanctum-home-creature-strip").getByTestId("actor-chip")).toHaveCount(2);
-    await expect(page.getByTestId("sanctum-home-sectors-held")).toContainText("Pending");
+    // The shipped copy, not "Pending". `SanctumHome.tsx:79` renders the literal
+    // "Sectors held - not shown yet" and `SanctumStage.test.tsx:339` already asserts "not shown yet",
+    // so the e2e was the only place still expecting the older word. Asserting the shipped string keeps
+    // the two suites from drifting apart, and it is still a real assertion about an honest
+    // not-yet-implemented state rather than a fabricated count.
+    await expect(page.getByTestId("sanctum-home-sectors-held")).toContainText("not shown yet");
     await expect(page.getByTestId("sanctum-home-tonight-empty")).toBeVisible();
     await expect(page.getByTestId("sanctum-home-defend")).toBeVisible();
 

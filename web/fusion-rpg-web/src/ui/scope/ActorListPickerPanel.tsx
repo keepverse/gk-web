@@ -94,11 +94,24 @@ export function ActorListPickerPanel({
               (c) => c.kind === "ready" && c.targetPtr.trim() === key
             );
             if (!ready || ready.kind !== "ready") return;
+            // Every other selection path in this picker logs its commit — `relation selected` in
+            // ActorMenuScopePicker.tsx:62, `mode changed` at :95, `type selection changed` in
+            // TypeMultiSelect.tsx:29 — and this one did not, which left the panel's selection the
+            // only unobservable action in the component. Logged AFTER the readiness guards, so it
+            // fires on a real selection and never on a rejected one.
+            console.debug("[fe-essentials] actor-menu-scope-picker: list selection", {
+              kind,
+              targetPtr: ready.targetPtr.trim()
+            });
             onChange({ kind: "target", targetPtr: ready.targetPtr.trim() });
             return;
           }
           const ready = (candidates ?? []).find((c) => c.kind === "ready" && c.data.instanceId === key);
           if (!ready || ready.kind !== "ready") return;
+          console.debug("[fe-essentials] actor-menu-scope-picker: list selection", {
+            kind,
+            instanceId: ready.data.instanceId
+          });
           onChange({ kind: "uniqueCreature", instanceId: ready.data.instanceId });
         }}
         empty={
