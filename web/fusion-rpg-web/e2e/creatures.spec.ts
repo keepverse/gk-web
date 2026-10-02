@@ -68,8 +68,8 @@ test.describe("Creatures layer (T10)", () => {
   test("cards show side and level, and no typeId leaks onto the page", async ({ page }) => {
     await mockSanctum(page);
     await page.goto("/#/sanctum?panel=creatures");
-    await expect(page.getByTestId("creatures-row-a1")).toContainText("Plant");
-    await expect(page.getByTestId("creatures-row-a1")).toContainText("Lv 5");
+    await expect(page.getByTestId("creatures-item-a1")).toContainText("Plant");
+    await expect(page.getByTestId("creatures-item-a1")).toContainText("Lv 5");
     const bodyText = await page.textContent("body");
     expect(bodyText?.toLowerCase()).not.toContain("typeid");
   });
@@ -93,27 +93,35 @@ test.describe("Creatures layer (T10)", () => {
 });
 
 // T27 (plate 02 §A/§D): search/filter/sort, and GG-51's close/reopen persistence, in a real browser.
+// TEST-ID DRIFT, corrected 2026-10-02 against the component rather than the other way round.
+// ActorCollection derives every id from a `testId` prefix, so these names were never literal in
+// src and a plain-text search cannot see them: a row is `${testId}-item-${item.key}` (not
+// `-row-`), the first-tier prompt is `${testId}-search-first` (not `-search-first-prompt`), and the
+// side control is a single `${testId}-side` <select> of all/plant/zombie (not two
+// `-filter-all`/`-filter-zombie` buttons carrying aria-current). Persistence is therefore asserted
+// through the select's VALUE, which is the same property the old aria-current check covered.
+// Every assertion's intent is unchanged.
 test.describe("Creatures layer — plate parity (T27)", () => {
   test("the side filter and search box narrow the real list live", async ({ page }) => {
     await mockSanctum(page);
     await page.goto("/#/sanctum?panel=creatures");
-    await expect(page.getByTestId("creatures-row-a1")).toBeVisible();
-    await expect(page.getByTestId("creatures-row-a2")).toBeVisible();
+    await expect(page.getByTestId("creatures-item-a1")).toBeVisible();
+    await expect(page.getByTestId("creatures-item-a2")).toBeVisible();
 
-    await page.getByTestId("creatures-filter-zombie").click();
-    await expect(page.getByTestId("creatures-row-a1")).not.toBeVisible();
-    await expect(page.getByTestId("creatures-row-a2")).toBeVisible();
+    await page.getByTestId("creatures-side").selectOption("zombie");
+    await expect(page.getByTestId("creatures-item-a1")).not.toBeVisible();
+    await expect(page.getByTestId("creatures-item-a2")).toBeVisible();
 
-    await page.getByTestId("creatures-filter-all").click();
+    await page.getByTestId("creatures-side").selectOption("all");
     await page.getByTestId("creatures-search").fill("lvl 5");
-    await expect(page.getByTestId("creatures-row-a1")).toBeVisible();
-    await expect(page.getByTestId("creatures-row-a2")).not.toBeVisible();
+    await expect(page.getByTestId("creatures-item-a1")).toBeVisible();
+    await expect(page.getByTestId("creatures-item-a2")).not.toBeVisible();
   });
 
   test("search/filter/sort state survives the layer closing and reopening, within the session (GG-51)", async ({ page }) => {
     await mockSanctum(page);
     await page.goto("/#/sanctum?panel=creatures");
-    await page.getByTestId("creatures-filter-zombie").click();
+    await page.getByTestId("creatures-side").selectOption("zombie");
     await page.getByTestId("creatures-sort").selectOption("level-asc");
 
     await page.keyboard.press("Escape");
@@ -121,8 +129,8 @@ test.describe("Creatures layer — plate parity (T27)", () => {
 
     await page.keyboard.press("c");
     await expect(page.getByTestId("creatures-layer")).toBeVisible();
-    await expect(page.getByTestId("creatures-filter-zombie")).toHaveAttribute("aria-current", "true");
+    await expect(page.getByTestId("creatures-side")).toHaveValue("zombie");
     await expect(page.getByTestId("creatures-sort")).toHaveValue("level-asc");
-    await expect(page.getByTestId("creatures-row-a1")).not.toBeVisible();
+    await expect(page.getByTestId("creatures-item-a1")).not.toBeVisible();
   });
 });

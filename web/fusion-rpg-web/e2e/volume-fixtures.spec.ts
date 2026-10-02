@@ -66,6 +66,14 @@ async function mockSanctum(page: Page, actorCount: number) {
  * to run against a real browser, the same reason T13's chunk-loading proof is an e2e spec and not a
  * unit test.
  */
+// TEST-ID DRIFT, corrected 2026-10-02 against the component rather than the other way round.
+// ActorCollection derives every id from a `testId` prefix, so these names were never literal in
+// src and a plain-text search cannot see them: a row is `${testId}-item-${item.key}` (not
+// `-row-`), the first-tier prompt is `${testId}-search-first` (not `-search-first-prompt`), and the
+// side control is a single `${testId}-side` <select> of all/plant/zombie (not two
+// `-filter-all`/`-filter-zombie` buttons carrying aria-current). Persistence is therefore asserted
+// through the select's VALUE, which is the same property the old aria-current check covered.
+// Every assertion's intent is unchanged.
 test.describe("Volume fixtures (GG-50 — CreaturesLayer)", () => {
   test("at 10: renders all rows directly (below the virtualize threshold)", async ({ page }) => {
     await mockSanctum(page, 10);
@@ -75,7 +83,7 @@ test.describe("Volume fixtures (GG-50 — CreaturesLayer)", () => {
 
     const list = page.getByTestId("creatures-list");
     await expect(list).not.toHaveAttribute("data-virtualized", "true");
-    await expect(page.locator('[data-testid^="creatures-row-"]')).toHaveCount(10);
+    await expect(page.locator('[data-testid^="creatures-item-"]')).toHaveCount(10);
   });
 
   test("at 100: switches to the virtualized strategy — far fewer than 100 rows actually mount", async ({ page }) => {
@@ -85,11 +93,11 @@ test.describe("Volume fixtures (GG-50 — CreaturesLayer)", () => {
     await expect(page.getByTestId("creatures-layer")).toBeVisible();
 
     // 100 is inside the windowed tier (25–240) — the grid renders directly, no search-first prompt.
-    await expect(page.getByTestId("creatures-search-first-prompt")).not.toBeVisible();
+    await expect(page.getByTestId("creatures-search-first")).not.toBeVisible();
     const list = page.getByTestId("creatures-list");
     await expect(list).toHaveAttribute("data-virtualized", "true");
 
-    const mounted = await page.locator('[data-testid^="creatures-row-"]').count();
+    const mounted = await page.locator('[data-testid^="creatures-item-"]').count();
     expect(mounted).toBeGreaterThan(0);
     expect(mounted).toBeLessThan(30); // the ~320px window fits well under 10 rows plus overscan
   });
@@ -102,18 +110,22 @@ test.describe("Volume fixtures (GG-50 — CreaturesLayer)", () => {
     await page.getByTestId("rail-creatures").click();
     await expect(page.getByTestId("creatures-layer")).toBeVisible();
 
-    await expect(page.getByTestId("creatures-search-first-prompt")).toBeVisible();
-    await expect(page.getByTestId("creatures-search-first-prompt")).toContainText("241 creatures");
+    await expect(page.getByTestId("creatures-search-first")).toBeVisible();
+    // LEFT RED DELIBERATELY: the prompt reads "Too many to list - search or filter to narrow
+    // the roster." and carries no count. Making this pass means either weakening the
+    // assertion or changing user-visible copy; the first is forbidden and the second is a
+    // product decision, so it is reported rather than resolved here.
+    await expect(page.getByTestId("creatures-search-first")).toContainText("241 creatures");
     await expect(page.getByTestId("creatures-list")).not.toBeVisible();
-    expect(await page.locator('[data-testid^="creatures-row-"]').count()).toBe(0);
+    expect(await page.locator('[data-testid^="creatures-item-"]').count()).toBe(0);
 
-    await page.getByTestId("creatures-filter-zombie").click();
-    await expect(page.getByTestId("creatures-search-first-prompt")).not.toBeVisible();
+    await page.getByTestId("creatures-side").selectOption("zombie");
+    await expect(page.getByTestId("creatures-search-first")).not.toBeVisible();
     const list = page.getByTestId("creatures-list");
     await expect(list).toHaveAttribute("data-virtualized", "true");
     // rendered node count still stays flat, same ceiling as the windowed tier — filtering into the
     // search-first tier reuses the same virtualized rendering path, not a separate one.
-    const mounted = await page.locator('[data-testid^="creatures-row-"]').count();
+    const mounted = await page.locator('[data-testid^="creatures-item-"]').count();
     expect(mounted).toBeGreaterThan(0);
     expect(mounted).toBeLessThan(30);
   });
@@ -123,13 +135,13 @@ test.describe("Volume fixtures (GG-50 — CreaturesLayer)", () => {
     await page.goto("/#/sanctum");
     await page.getByTestId("rail-creatures").click();
     await expect(page.getByTestId("creatures-layer")).toBeVisible();
-    await expect(page.getByTestId("creatures-search-first-prompt")).toBeVisible();
+    await expect(page.getByTestId("creatures-search-first")).toBeVisible();
 
     await page.getByTestId("creatures-search").fill("plant");
     const list = page.getByTestId("creatures-list");
     await expect(list).toHaveAttribute("data-virtualized", "true");
 
-    const mounted = await page.locator('[data-testid^="creatures-row-"]').count();
+    const mounted = await page.locator('[data-testid^="creatures-item-"]').count();
     expect(mounted).toBeGreaterThan(0);
     expect(mounted).toBeLessThan(30);
   });
@@ -146,7 +158,7 @@ test.describe("Volume fixtures (GG-50 — CreaturesLayer)", () => {
     await expect(list).toBeVisible();
     await expect(list).toHaveAttribute("data-virtualized", "true");
 
-    const rowIds = () => page.locator('[data-testid^="creatures-row-"]').evaluateAll((els) => els.map((e) => e.getAttribute("data-testid")));
+    const rowIds = () => page.locator('[data-testid^="creatures-item-"]').evaluateAll((els) => els.map((e) => e.getAttribute("data-testid")));
     await expect.poll(async () => (await rowIds()).length).toBeGreaterThan(0);
     const before = await rowIds();
 
