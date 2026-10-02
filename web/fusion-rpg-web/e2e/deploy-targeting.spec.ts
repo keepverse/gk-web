@@ -72,7 +72,7 @@ test.describe("Deploy targeting (T22)", () => {
     await mockShell(page);
     await page.goto("/#/sanctum");
     await page.getByTestId("rail-creatures").click();
-    await page.getByTestId("creatures-row-a1").click();
+    await page.getByTestId("creatures-item-a1").click();
     await expect(page.getByTestId("creatures-deploy")).toBeVisible();
 
     await page.getByTestId("creatures-deploy").click();

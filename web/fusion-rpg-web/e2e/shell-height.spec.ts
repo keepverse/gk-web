@@ -84,8 +84,8 @@ test.describe("Shell height (GG-61 — a dense entity scrolls inside its own she
     const shell = page.getByTestId("creatures-layer");
     await expect(shell).toBeVisible();
     // 20 rows renders — proves the dense fixture actually landed, not an empty/error state.
-    await expect(page.getByTestId("creatures-row-a0")).toBeVisible();
-    await expect(page.getByTestId("creatures-row-a19")).toHaveCount(1);
+    await expect(page.getByTestId("creatures-item-a0")).toBeVisible();
+    await expect(page.getByTestId("creatures-item-a19")).toHaveCount(1);
 
     const shellBox = await shell.boundingBox();
     expect(shellBox).not.toBeNull();
