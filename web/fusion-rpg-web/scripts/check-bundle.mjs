@@ -9,10 +9,20 @@
 // Run after `npm run build` (or via `npm run build:check`) — reads the real build output.
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { coreRoot } from "../gkRoots.mjs";
 
-const scriptDir = path.dirname(fileURLToPath(import.meta.url));
-const wwwroot = path.resolve(scriptDir, "../../../src/FusionRpg.Server/wwwroot");
+// The build output lives in the SERVER's wwwroot, which is in gk-core — vite.config.ts writes it
+// there through the same resolver. This script used to hardcode "../../../src/FusionRpg.Server/
+// wwwroot", a hop count that was correct only while the web sat beside the server; after the
+// split it pointed inside gk-web and this check was permanently red. Resolving through
+// coreRoot() also means KEEPVERSE_CORE_ROOT is honoured, so the path stays configuration.
+let wwwroot;
+try {
+  wwwroot = path.join(coreRoot(), "src", "FusionRpg.Server", "wwwroot");
+} catch (err) {
+  console.error(`check-bundle: ${err.message}`);
+  process.exit(1);
+}
 const indexHtmlPath = path.join(wwwroot, "index.html");
 
 if (!existsSync(indexHtmlPath)) {

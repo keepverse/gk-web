@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# The web is its own repository, so its gates live here rather than in a sibling's workflow.
+# Before the split these four steps sat in gk-core/.github/workflows/ci.yml with
+# `working-directory: web/fusion-rpg-web` - a path that stopped existing when the web moved
+# out, so they were resolving to nothing while still being declared. A gate that cannot run is
+# worse than an absent one: it reads as coverage in the file and as silence in the log.
+#
+# All three commands below were measured green in the full workspace before this file was
+# written (3283 vitest tests across 388 files, `tsc --noEmit` + vite build, and the bundle
+# check). The bundle check was itself permanently red until check-bundle.mjs was repointed
+# through gkRoots' coreRoot(); it had kept a pre-split relative hop and pointed inside gk-web
+# while vite writes to gk-core.
+jobs:
+  web:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        # Relative to the WORKSPACE ROOT, which holds gk-web/, gk-core/ and gk-data/ as siblings
+        # because each is checked out into its own `path:` below. Not `web/fusion-rpg-web` -
+        # that is the path inside gk-web, and from here it resolves to nothing.
+        working-directory: gk-web/web/fusion-rpg-web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: gk-web
+
+      # gkRoots.mjs resolves the workspace by walking up to a directory holding gk-core/ next
+      # to gk-data/, and THROWS when it cannot. Two siblings are therefore part of this job's
+      # substrate, not an optimisation.
+      - name: Checkout gk-core (public sibling)
+        uses: actions/checkout@v4
+        with:
+          repository: keepverse/gk-core
+          path: gk-core
+
+      # gk-data is PRIVATE and stays private (A4). It is checked out with a token rather than
+      # vendored, and the absence of that token is a NAMED failure below - never a skipped step,
+      # because src/i18n/leadNames.ts imports @gk-data at build time and a job that quietly
+      # tested less than it claims to is precisely the failure this gate exists to prevent.
+      - name: Refuse without the private-data token
+        shell: pwsh
+        env:
+          TOKEN: ${{ secrets.KEEPVERSE_DATA_TOKEN }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:TOKEN)) {
+            throw ("gk-web CI needs secrets.KEEPVERSE_DATA_TOKEN to check out the private " +
+                   "gk-data pack: src/i18n/leadNames.ts imports @gk-data/data/seed/narrative/" +
+                   "_registry/names.en.v1.json, so neither `npm test` nor `npm run build` can run " +
+                   "without it. This gate fails closed rather than skipping.")
+          }
+
+      - name: Checkout gk-data (private sibling)
+        uses: actions/checkout@v4
+        with:
+          repository: keepverse/gk-data
+          token: ${{ secrets.KEEPVERSE_DATA_TOKEN }}
+          path: gk-data
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: gk-web/web/fusion-rpg-web/package-lock.json
+
+      - name: Restore dependencies
+        run: |
+          npm ci
+          if ($LASTEXITCODE -ne 0) { throw "npm ci failed" }
+
+      - name: Web unit tests
+        run: |
+          npm test
+          if ($LASTEXITCODE -ne 0) { throw "npm test failed" }
+
+      - name: Web build (tsc --noEmit + vite build)
+        run: |
+          npm run build
+          if ($LASTEXITCODE -ne 0) { throw "npm run build failed" }
+
+      - name: Web bundle budget (GG-38 - Phaser stays off the entry chunk)
+        run: |
+          npm run check:bundle
+          if ($LASTEXITCODE -ne 0) { throw "npm run check:bundle failed" }
