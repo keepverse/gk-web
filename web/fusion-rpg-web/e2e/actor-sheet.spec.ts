@@ -81,7 +81,13 @@ test.describe("ActorSheet catalog-era shell", () => {
 
       await page.getByTestId("actor-sheet-rail-toggle").click();
       await expect(page.getByTestId("actor-sheet-rail")).toHaveAttribute("data-collapsed", "true");
-      await expect(page.getByTestId("actor-summarize-glyph")).toBeVisible();
+      // `actor-summarize-portrait`, not `actor-summarize-glyph`. ActorSummarize renders the TypeIcon
+      // when a species sheet RESOLVES and the initial-letter glyph only as the fallback when it does
+      // not - and this spec's own mock answers `**/api/actors/**/sheet**` with a sheet carrying
+      // `typeId: 1`. So the glyph was asserting a branch this test's fixtures cannot reach, and it
+      // failed at all three viewports. Asserting the portrait is also the STRONGER claim: it says the
+      // collapsed rail shows the actor's real type icon, not merely that something is drawn.
+      await expect(page.getByTestId("actor-summarize-portrait")).toBeVisible();
       await page.getByTestId("actor-sheet-rail-toggle").click();
       await expect(page.getByTestId("actor-sheet-rail")).toHaveAttribute("data-collapsed", "false");
 
