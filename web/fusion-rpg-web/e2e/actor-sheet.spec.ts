@@ -93,7 +93,16 @@ test.describe("ActorSheet catalog-era shell", () => {
 
       await expect(page.getByTestId("condition-xp-pending")).toBeVisible();
       await expect(panel.getByTestId("actor-standing-pending")).toBeVisible();
-      await expect(page.getByTestId("condition-live-effects-pending")).toBeVisible();
+      // The Effects strip is ABSENT here, and that absence is the contract rather than a gap. This
+      // used to assert `condition-live-effects-pending` was VISIBLE, which cannot happen:
+      // `buildStatusStrip` returns undefined when no status has a live glyph
+      // (`foldConditionSurfaceVm.ts:368`) and hard-codes `message: null` when it does build
+      // (`:377`) — its own unit test is "live statuses mount Effects strip without author notes".
+      // So the old assertion demanded a note the product deliberately never emits. Asserting the
+      // omission instead is the stronger claim and is not vacuous: both testids are absent because
+      // the piece was not built, not because it rendered empty.
+      await expect(page.getByTestId("condition-live-effects")).toHaveCount(0);
+      await expect(page.getByTestId("condition-live-effects-pending")).toHaveCount(0);
       // Catalog must not be painted as fake live status instances.
       await expect(page.locator('[data-testid="condition-live-effects"] [data-testid^="status-glyph"]')).toHaveCount(0);
 

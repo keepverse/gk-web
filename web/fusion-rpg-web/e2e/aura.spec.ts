@@ -82,6 +82,38 @@ async function mockAuraSurface(page: Page, runtime = freshRuntimeState()) {
       ]
     })
   );
+
+  // The actor SHEET, not just the derived channels. DerivedTab computes
+  // `hasSheet = (sheet.data?.derived?.length ?? 0) > 0` (src/ui/actor/DerivedTab.tsx:121) and takes
+  // the LEAN pending surface when the sheet is empty but `/derived` has channels (`:129-133`) — which
+  // is why the channel list rendered nothing while `/derived` was mocked. A sheet carrying the real
+  // channel rows is what makes the explorer render; the shape mirrors what actor-sheet.spec.ts
+  // already mocks for the same route.
+  await page.route("**/api/actors/fixture-actor-1/sheet", (route) =>
+    fulfillJson(route, {
+      instanceId: "fixture-actor-1",
+      playerId: 1,
+      side: "plant",
+      typeId: 1,
+      displayName: null,
+      level: 1,
+      derived: [
+        {
+          channelId: "progression.power",
+          displayName: "Power index",
+          reading: "Progression power",
+          composeKind: "FlatSum",
+          value: 12,
+          contributions: [{ sourceId: "rpg.progression", op: "Replace", value: 12 }],
+          unitClass: "GameUnits",
+          defaultValue: 0,
+          cap: null,
+          renderState: "active"
+        }
+      ],
+      primary: []
+    })
+  );
 }
 
 async function openKitAuraSurface(page: Page) {
@@ -149,16 +181,25 @@ test.describe("Aura surface (aura-skill T18c)", () => {
     await page.getByTestId("actor-ladder-open-panel").click();
     await page.getByTestId("actor-sheet-tab-derived").click();
 
-    // The family tab list and the `derived-family-*` rows this used to drive are gone. The derived tab
-    // is now a server-driven gui-lego recipe: a channel is a <button> carrying
-    // `data-testid="derived-channel-<channelId>"` that emits `derived.channel.select`
-    // (`src/ui/gui-lego/pieces/domain.tsx:135-138`), and selecting it is what reveals the
-    // contributions. `derived-family-*` is emitted nowhere in src, and `getByRole("tab", …)` on this
-    // surface can only ever match the sheet's own top-level rail.
+    // `progression.power` is a real catalog family, but it sits in sheetGroup `progression`, which
+    // belongs to the `other` tab ("Other") — and the derived tab opens on `elements`. So the channel is
+    // two levels down, not one. The family tab list and the `derived-family-*` rows this test used to
+    // drive are gone entirely: `derived-family-*` is emitted nowhere in src, and a channel is now a
+    // <button> carrying `data-testid="derived-channel-<channelId>"` that emits `derived.channel.select`
+    // (`src/ui/gui-lego/pieces/domain.tsx:135-138`).
+    await page.getByRole("tab", { name: "Other" }).click();
     await page.getByTestId("derived-channel-progression.power").click();
     await expect(page.getByTestId("derived-channel-progression.power")).toBeVisible();
-    // GG-49 InspectSplit, non-vacuously: the contribution row is the server's own recorded source.
-    await expect(page.getByTestId("channel-contribution-rpg.progression")).toBeVisible();
+    // GG-49 InspectSplit, non-vacuously. The contributions render through the gui-lego "sources" piece,
+    // which emits a plain `<li>` per source inside `<ul data-testid="derived-sources">` with no
+    // per-contribution testid (`pieces/domain.tsx:294-306`). The `channel-contribution-<sourceId>`
+    // testid belongs to `ui/actor/ChannelContributions.tsx`, a different component the derived tab no
+    // longer uses. Asserting the source id AND its signed value is still non-vacuuous: it proves the
+    // server's own recorded source reached the surface with the right sign, rather than an empty
+    // "No contributions." row.
+    await expect(page.getByTestId("derived-sources")).toContainText("rpg.progression");
+    await expect(page.getByTestId("derived-sources")).toContainText("+12");
+    await expect(page.getByTestId("derived-sources")).not.toContainText("No contributions.");
   });
 
   const VIEWPORTS = [
