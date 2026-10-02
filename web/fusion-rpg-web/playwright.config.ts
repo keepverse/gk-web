@@ -73,6 +73,11 @@ const anyDevProjectRuns = PROJECTS.some((p) => (DEV_ONLY as readonly string[]).i
 
 export default defineConfig({
   testDir: "./e2e",
+  // Refuses the RUN when the served bundle is older than the sources feeding it. `npm run preview`
+  // serves gk-core's gitignored `wwwroot/`, so without this the suite's verdict is decided by when
+  // someone last ran `npm run build` and a stale bundle reports green against the PREVIOUS build.
+  // Fail-closed and named; see e2e/helpers/bundle-gate.ts.
+  globalSetup: "./e2e/global-setup.ts",
   // `.test.ts` anywhere under e2e/ is a vitest-only unit test (picked up separately by
   // vite.config.ts's `e2e/**/*.test.{ts,tsx}` include) — never a Playwright spec. Matched with no
   // path-separator anchor so it holds on Windows too: `/\/helpers\//`, the previous form, silently
