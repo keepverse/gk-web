@@ -1,6 +1,7 @@
 import { expect, type Page } from "@playwright/test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { coreRoot } from "../../gkRoots.mjs";
 import { normalizePtr } from "./live-debug-api-core";
 
 export type CanvasHudExpect = {
@@ -50,7 +51,11 @@ const CANVAS_CHILD_BY_KEY: Record<string, string> = {
  * assert the fixture-fallback path keep asserting it.
  */
 export async function mockActorSurfaceCatalog(page: Page): Promise<void> {
-  const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
+  // The tuning lives in gk-core, not in this repository. This used to walk four levels up from
+  // e2e/helpers - a hop count that resolved to gk-web while the web sat beside the tuning, and
+  // read ENOENT from gk-web/data/tuning once the split moved it. coreRoot() is the same
+  // resolver vite.config.ts and check-bundle.mjs use, and it honours KEEPVERSE_CORE_ROOT.
+  const repoRoot = coreRoot();
   const hud = JSON.parse(readFileSync(join(repoRoot, "data/tuning/actor-hud.v7.json"), "utf8")) as {
     screenIdentityElementPrimaryPixels: number;
     screenIdentityElementSecondaryPixels: number;

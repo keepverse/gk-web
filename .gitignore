@@ -141,3 +141,17 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Playwright / e2e run output. These carried over from the pre-split tree, where the web sat at
+# the repository root and **/ covered them; in this repository the web lives under web/, so the
+# patterns are anchored to that path. Measured after an e2e run: 10.4 MB across 152 files
+# (playwright-report 1.1, test-results 0.8, e2e/artifacts 7.5, tmp 0.3, e2e/.artifacts 0.7), none
+# of it ignored. playwright-report and test-results can carry traces of a session, so this is
+# also the reason they must not be committed rather than merely the reason they are large.
+web/fusion-rpg-web/playwright-report/
+web/fusion-rpg-web/test-results/
+web/fusion-rpg-web/tmp/
+web/fusion-rpg-web/e2e/artifacts/
+web/fusion-rpg-web/e2e/.artifacts/
+.playwright-cli/
+.playwright-mcp/
