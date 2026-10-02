@@ -9,6 +9,7 @@ import { Banner, Button } from "@/ui";
 import type { ActorRungState } from "./actorRungState";
 import { RungStateFallback } from "./RungStateFallback";
 import { CommanderSheetFooter } from "./CommanderSheetFooter";
+import { ActionsTab } from "./ActionsTab";
 import { AptitudesTab, type AptitudeDraftState } from "./AptitudesTab";
 import { ConditionTab } from "./ConditionTab";
 import { DerivedTab } from "./DerivedTab";
@@ -302,7 +303,16 @@ export function ActorPanel({
           ) : null}
           {tab === "status" ? <StatusTab surface={surface} /> : null}
           {tab === "elements" ? <ElementsTab data={data} surface={surface} /> : null}
-          {tab === "kit" ? <KitTab data={data} surface={surface} /> : null}
+          {tab === "kit" ? (
+            <>
+              {/* aura-skill T18c: the aura + regular-action surface rides in the Kit tab, which is
+                  where it was mounted from 2026-08-29 until 9aad045cf (2026-09-07) deferred it with a
+                  placeholder reading "Aura row — live aura chrome when present". That condition is met:
+                  /api/aura-runtime is live in the server, so the placeholder's chrome now mounts. */}
+              <ActionsTab data={data} />
+              <KitTab data={data} surface={surface} />
+            </>
+          ) : null}
           {tab === "paths" ? <PathsTab elementTyping={data.elementTyping} /> : null}
         </div>
       </div>
