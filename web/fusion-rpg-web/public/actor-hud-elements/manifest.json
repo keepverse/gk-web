@@ -1,6 +1,17 @@
 {
   "schemaVersion": 1,
   "kind": "actor-hud-element-icons",
+  "provenance": {
+    "thisIs": "a DOWNSTREAM COPY, recorded so this repository's tree is not mistaken for the authority",
+    "authoritativeTree": "gk-fusion: src/FusionRpg.Injector/Assets/actor-hud-elements/",
+    "mechanism": "MANUAL COPY. No mirror, sync or checksum tool for this tree exists in any repository, and no test compares the two copies. A PNG changed upstream is NOT picked up here automatically.",
+    "carriesTiers": [64],
+    "upstreamAlsoCarries": [128, 256],
+    "whyTheSubsetIsNotDrift": "No consumer requests a higher tier: this repository's URL template names the root PNGs, and the loader in gk-fusion loads the root PNGs. The 128 and 256 tiers have no reader in either repository today, and copying them here would cost roughly 360 KB in a web bundle for a tier nothing asks for.",
+    "elementTableOwner": "The assets[] rows below restate gk-core's data/tuning/element-catalog.v2.json (id / hudGlyph / color) value for value. That catalogue is the OWNER; this table is a SNAPSHOT taken at generation time, and the catalogue wins if they disagree.",
+    "fileNamingIsTheContract": "A glyph's file is <hudGlyph>.png at this tree's root. That convention is what both consumers depend on, and NEITHER reads this file - so the assets[].path column below restates the convention rather than describing a mapping anything loads.",
+    "verifiedOn": "2026-10-05 - the 6 root PNGs here are byte-identical to the authoritative tree's (SHA-256, all six). Compare before trusting that; nothing enforces it automatically."
+  },
   "source": {
     "method": "built-in image generation",
     "generatedOn": "2026-09-18",
@@ -11,11 +22,13 @@
     "sourceLayout": "3 columns by 2 rows",
     "crop": "per-element alpha bounds, expanded 14% to preserve the energy silhouette",
     "outputCanvasPixels": [64, 64],
-    "availableCanvasPixels": [64, 128, 256],
+    "availableCanvasPixels": [64],
     "variants": {
-      "64": "root PNG files; Unity runtime source",
-      "128": "128/<hudGlyph>.png; reserved for FE display",
-      "256": "256/<hudGlyph>.png; reserved for FE display"
+      "64": "root PNG files; the only tier this repository carries, and the only one any consumer requests"
+    },
+    "upstreamOnlyVariants": {
+      "128": "128/<hudGlyph>.png; present in gk-fusion only. No reader in either repository today.",
+      "256": "256/<hudGlyph>.png; present in gk-fusion only. No reader in either repository today."
     },
     "alpha": "preserved",
     "resampling": "high-quality bicubic"
